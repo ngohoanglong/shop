@@ -39,6 +39,7 @@ const FeatureBar = dynamic(
 )
 
 interface Props {
+  renderNavbar?: Function
   pageProps: {
     pages?: Page[]
     commerceFeatures: Record<string, boolean>
@@ -47,6 +48,7 @@ interface Props {
 
 const Layout: FC<Props> = ({
   children,
+  renderNavbar,
   pageProps: { commerceFeatures, ...pageProps },
 }) => {
   const {
@@ -61,7 +63,7 @@ const Layout: FC<Props> = ({
   return (
     <CommerceProvider locale={locale}>
       <div className={cn(s.root)}>
-        <Navbar />
+        {renderNavbar ? renderNavbar() : <Navbar />}
         <main className="fit">{children}</main>
         <Footer pages={pageProps.pages} />
 

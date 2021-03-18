@@ -11,6 +11,7 @@ const Noop: FC = ({ children }) => <>{children}</>
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   const Layout = (Component as any).Layout || Noop
+  const renderNavbar = (Component as any).renderNavbar
 
   useEffect(() => {
     document.body.classList?.remove('loading')
@@ -20,7 +21,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     <>
       <Head />
       <ManagedUIContext>
-        <Layout pageProps={pageProps}>
+        <Layout pageProps={pageProps} renderNavbar={renderNavbar}>
           <Component {...pageProps} />
         </Layout>
       </ManagedUIContext>

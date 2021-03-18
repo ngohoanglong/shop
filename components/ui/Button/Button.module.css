@@ -3,7 +3,7 @@
 }
 
 .root:hover {
-  @apply bg-accents-0 text-primary border border-secondary;
+  @apply bg-0 text-primary border border-secondary;
 }
 
 .root:focus {
@@ -15,7 +15,7 @@
 }
 
 .loading {
-  @apply bg-accents-1 text-accents-3 border-accents-2 cursor-not-allowed;
+  @apply bg-1 text-accents-3 border-accents-2 cursor-not-allowed;
 }
 
 .slim {
@@ -24,7 +24,7 @@
 
 .disabled,
 .disabled:hover {
-  @apply text-accents-4 border-accents-2 bg-accents-1 cursor-not-allowed;
+  @apply text-accents-4 border-accents-2 bg-1 cursor-not-allowed;
   filter: grayscale(1);
   -webkit-transform: translateZ(0);
   -webkit-perspective: 1000;

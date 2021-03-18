@@ -2,8 +2,10 @@ import { FC, useState, useEffect } from 'react'
 import throttle from 'lodash.throttle'
 import cn from 'classnames'
 import s from './Navbar.module.css'
-
-const NavbarRoot: FC = ({ children }) => {
+export interface Props {
+  transparent?: boolean
+}
+const NavbarRoot: FC<Props> = ({ children, transparent }) => {
   const [hasScrolled, setHasScrolled] = useState(false)
 
   useEffect(() => {
@@ -24,7 +26,13 @@ const NavbarRoot: FC = ({ children }) => {
   }, [hasScrolled])
 
   return (
-    <div className={cn(s.root, { 'shadow-magical': hasScrolled })}>
+    <div
+      className={cn(
+        s.root,
+        transparent && s.transparent,
+        hasScrolled && s.hasScrolled
+      )}
+    >
       {children}
     </div>
   )

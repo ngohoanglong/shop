@@ -5,7 +5,7 @@ import type { LineItem } from '@framework/types'
 import useCart from '@framework/cart/use-cart'
 import useCustomer from '@framework/customer/use-customer'
 import { Avatar } from '@components/common'
-import { Heart, Bag } from '@components/icons'
+import { Heart, Bag, User, Menu, Search } from '@components/icons'
 import { useUI } from '@components/ui/context'
 import DropdownMenu from './DropdownMenu'
 import s from './UserNav.module.css'
@@ -26,12 +26,24 @@ const UserNav: FC<Props> = ({ className }) => {
     <nav className={cn(s.root, className)}>
       <div className={s.mainContainer}>
         <ul className={s.list}>
+          <li className={s.item}>
+            {customer ? (
+              <DropdownMenu />
+            ) : (
+              <a onClick={() => openModal()} aria-label="Wishlist">
+                <User />
+              </a>
+            )}
+          </li>
           <li className={s.item} onClick={toggleSidebar}>
             <Bag />
             {itemsCount > 0 && <span className={s.bagCount}>{itemsCount}</span>}
           </li>
+          <li className={cn(s.item, s.itemhidden)} onClick={toggleSidebar}>
+            <Search />
+          </li>
           {process.env.COMMERCE_WISHLIST_ENABLED && (
-            <li className={s.item}>
+            <li className={cn(s.item, 'hidden lg:block')}>
               <Link href="/wishlist">
                 <a onClick={closeSidebarIfPresent} aria-label="Wishlist">
                   <Heart />
@@ -40,17 +52,7 @@ const UserNav: FC<Props> = ({ className }) => {
             </li>
           )}
           <li className={s.item}>
-            {customer ? (
-              <DropdownMenu />
-            ) : (
-              <button
-                className={s.avatarButton}
-                aria-label="Menu"
-                onClick={() => openModal()}
-              >
-                <Avatar />
-              </button>
-            )}
+            {customer ? <DropdownMenu /> : <DropdownMenu />}
           </li>
         </ul>
       </div>

@@ -16,7 +16,7 @@
     & .productTitle > span,
     & .productPrice,
     & .wishlistButton {
-      @apply bg-secondary text-secondary;
+      @apply bg-4 text-base;
     }
 
     &:nth-child(6n + 1) .productTitle > span,
@@ -81,7 +81,7 @@
 
 .simple {
   & .squareBg {
-    @apply bg-accents-0 !important;
+    @apply bg-0 !important;
     background-image: url('/bg-products.svg');
   }
 
@@ -105,7 +105,7 @@
   letter-spacing: 0.4px;
 
   & span {
-    @apply py-4 px-6 bg-primary text-primary font-bold;
+    @apply py-4 px-6 bg-3 text-base bg-opacity-70  font-bold;
     font-size: inherit;
     letter-spacing: inherit;
     box-decoration-break: clone;
@@ -114,12 +114,12 @@
 }
 
 .productPrice {
-  @apply py-4 px-6 bg-primary text-primary font-semibold inline-block text-sm leading-6;
+  @apply py-4 px-6 bg-3 text-base bg-opacity-70  font-semibold inline-block text-sm leading-6;
   letter-spacing: 0.4px;
 }
 
 .wishlistButton {
-  @apply w-10 h-10 flex ml-auto items-center justify-center bg-primary text-primary font-semibold  text-xs leading-6 cursor-pointer;
+  @apply w-10 h-10 flex ml-auto items-center justify-center bg-3 text-base bg-opacity-70  font-semibold  text-xs leading-6 cursor-pointer;
 }
 
 .imageContainer {
