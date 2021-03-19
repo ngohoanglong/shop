@@ -72,6 +72,15 @@ module.exports = {
       scale: {
         120: '1.2',
       },
+      spacing: {
+        xs: '0.6em',
+        sm: '0.8em',
+        md: '1em',
+        lg: '1.2em',
+        xl: '1.4em',
+        '2xl': '1.6em',
+        '3xl': '1.8em',
+      },
     },
   },
 }

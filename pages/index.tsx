@@ -11,6 +11,7 @@ import getSiteInfo from '@framework/common/get-site-info'
 import getAllPages from '@framework/common/get-all-pages'
 import React, { useEffect, useLayoutEffect } from 'react'
 import Image from 'next/image'
+import Bestselling from '@components/home/Bestselling'
 
 const placeholderImg = '/product-img-placeholder.svg'
 
@@ -50,17 +51,13 @@ export default function Home({
       <HeroSlider>
         <div key={0}>
           <div className="flex items-center justify-center h-full w-screen lg:h-screen lg:py-32 flex-shrink-0 flex-col py-16 bg-gray-100  relative">
-            <img
-              src="https://live.hasthemes.com/html/7/helendo-preview/helendo/assets/images/hero/home-default-1.jpg"
-              className="absolute right-0 top-0 w-full h-full bg-0 object-cover"
-            />
             <Container className="w-full relative h-96 px-6 flex flex-col justify-center">
               <h4 className="font-bold text-primary mb-2 lg:text-lg xl:text-xl text-sm max-w-xs">
-                CHAIR COLLECTION 2020
+                CHAIR <br /> COLLECTION <br /> 2020
               </h4>
               <h1
                 style={{ paddingBottom: '0.3em' }}
-                className="font-semibold text-3xl lg:text-5xl xl:text-6xl  max-w-sm lg:max-w-xl xl:max-w-2xl"
+                className="text-3xl lg:text-5xl xl:text-6xl  max-w-sm lg:max-w-xl xl:max-w-2xl"
               >
                 Welcome To <br />
                 Helendo Store
@@ -105,7 +102,7 @@ export default function Home({
           const product = products[i]
           return (
             <div key={i + 1}>
-              <div className="flex items-center w-screen lg:h-screen lg:py-32 flex-shrink-0 flex-col py-20 bg-0 relative">
+              <div className="flex items-center justify-center w-screen lg:h-screen lg:py-32 flex-shrink-0 flex-col py-20 bg-0 relative">
                 <div className="absolute right-0 top-0 flex bg-0 items-center w-1/2 h-full object-cover">
                   <Image
                     layout="fill"
@@ -121,7 +118,7 @@ export default function Home({
                   </h4>
                   <h1
                     style={{ paddingBottom: '0.3em' }}
-                    className="font-semibold text-3xl lg:text-5xl xl:text-6xl max-w-sm lg:max-w-xl xl:max-w-2xl"
+                    className="text-3xl lg:text-5xl xl:text-6xl max-w-sm lg:max-w-xl xl:max-w-2xl"
                   >
                     {product.name}
                   </h1>
@@ -182,12 +179,12 @@ export default function Home({
                   />
                 </div>
                 <div className="relative lg:w-1/2 w-full flex flex-col justify-center">
-                  <h4 className="font-bold text-gray-500 mb-2 lg:text-sm xl:text-lg text-xs max-w-xs">
+                  <h4 className="text-gray-500 mb-2 lg:text-sm xl:text-lg text-xs max-w-xs">
                     CHAIR COLLECTION 2020
                   </h4>
                   <h1
                     style={{ paddingBottom: '0.3em' }}
-                    className="font-semibold text-xl lg:text-3xl xl:text-4xl max-w-sm lg:max-w-xl xl:max-w-2xl"
+                    className=" text-xl lg:text-3xl xl:text-4xl max-w-sm lg:max-w-xl xl:max-w-2xl"
                   >
                     {product.name}
                   </h1>
@@ -204,8 +201,9 @@ export default function Home({
                   </div>
                   <div className="mt-6">
                     <div className="px-4 border-primary border py-2 text-primary inline-flex items-center">
-                      Only{' '}
+                      Only
                       <span>
+                        {' '}
                         {product.price.value}
                         &nbsp;
                         {product.price.currencyCode}
@@ -247,12 +245,12 @@ export default function Home({
                 />
               </div>
               <Container className="w-full relative px-6 flex flex-col justify-center">
-                <h4 className="font-bold text-gray-500 mb-2 lg:text-sm xl:text-lg text-xs max-w-xs">
+                <h4 className="text-gray-500 mb-2 lg:text-sm xl:text-lg text-xs max-w-xs">
                   CHAIR COLLECTION 2020
                 </h4>
                 <h1
                   style={{ paddingBottom: '0.3em' }}
-                  className="font-semibold text-xl lg:text-3xl xl:text-4xl max-w-sm lg:max-w-xl xl:max-w-2xl"
+                  className=" text-xl lg:text-3xl xl:text-4xl max-w-sm lg:max-w-xl xl:max-w-2xl"
                 >
                   {product.name}
                 </h1>
@@ -269,8 +267,9 @@ export default function Home({
                 </div>
                 <div className="mt-6">
                   <div className="px-4 border-primary border py-2 text-primary inline-flex items-center">
-                    Only{' '}
+                    Only
                     <span>
+                      {' '}
                       {product.price.value}
                       &nbsp;
                       {product.price.currencyCode}
@@ -299,6 +298,9 @@ export default function Home({
           </div>
         )
       })}
+      <Container>
+        <Bestselling />
+      </Container>
     </>
   )
 }
