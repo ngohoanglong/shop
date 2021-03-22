@@ -15,7 +15,6 @@ interface Props {
 
 const Sidebar: FC<Props> = ({ children, open = false, onClose }) => {
   const ref = useRef() as React.MutableRefObject<HTMLDivElement>
-
   useEffect(() => {
     if (ref.current) {
       if (open) {

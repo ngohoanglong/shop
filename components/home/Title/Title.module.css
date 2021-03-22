@@ -1,0 +1,24 @@
+.root {
+}
+.subTitle {
+  @apply font-bold text-primary mb-sm lg:text-lg xl:text-xl text-sm max-w-xs;
+  line-height: 1.41;
+}
+.title {
+  @apply text-3xl font-semibold lg:text-5xl xl:text-6xl  max-w-sm lg:max-w-xl xl:max-w-2xl;
+  line-height: 1.1;
+}
+
+.divide {
+  @apply border-b-4 mt-lg lg:border-b-8 w-20 border-primary;
+}
+
+.root.small .subTitle {
+  @apply font-semibold text-accents-5 mb-2 md:text-sm  text-xs max-w-xs;
+}
+.root.small .title {
+  @apply text-xl sm:text-2xl md:text-4xl max-w-sm lg:max-w-xl xl:max-w-2xl;
+}
+.root.small .divide {
+  @apply border-b-2 mt-md lg:border-b-4 w-20 border-primary;
+}

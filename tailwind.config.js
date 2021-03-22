@@ -19,6 +19,9 @@ module.exports = {
       maxWidth: {
         '8xl': '1920px',
       },
+      fontFamily: {
+        prata: ['"Prata"', 'serif', 'Georgia'],
+      },
       colors: {
         primary: 'var(--primary)',
         'primary-2': 'var(--primary-2)',
@@ -57,7 +60,7 @@ module.exports = {
         9: 'var(--accents-9)',
       },
       textColor: {
-        base: 'var(--text-base)',
+        text: 'var(--text-base)',
         primary: 'var(--text-primary)',
         secondary: 'var(--text-secondary)',
       },
@@ -73,14 +76,19 @@ module.exports = {
         120: '1.2',
       },
       spacing: {
-        xs: '0.6em',
-        sm: '0.8em',
-        md: '1em',
-        lg: '1.2em',
-        xl: '1.4em',
-        '2xl': '1.6em',
-        '3xl': '1.8em',
+        xs: '0.6rem',
+        sm: '0.8rem',
+        md: '1rem',
+        lg: '1.2rem',
+        xl: '1.4rem',
+        '2xl': '1.6rem',
+        '3xl': '1.8rem',
       },
+    },
+  },
+  variants: {
+    extend: {
+      translate: ['active', 'group-hover'],
     },
   },
 }

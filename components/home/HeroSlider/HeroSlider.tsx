@@ -46,7 +46,8 @@ const HeroSlider: FC = ({ children }) => {
 
     sliderContainerRef.current!.addEventListener(
       'touchstart',
-      preventNavigation
+      preventNavigation,
+      { passive: true }
     )
 
     return () => {

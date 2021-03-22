@@ -5,83 +5,92 @@ import type { Product } from '@commerce/types'
 import s from './ProductCard.module.css'
 import Image, { ImageProps } from 'next/image'
 import WishlistButton from '@components/wishlist/WishlistButton'
+import { ActionButton } from '@components/common'
+import { Bag, Heart, Plus } from '@components/icons'
 
+const placeholderImg = '/product-img-placeholder.svg'
+
+interface LabelProps {
+  variant?: 'default' | 'out-of-stock' | 'discount'
+  text: string
+  position?: string
+}
 interface Props {
   className?: string
   product: Product
   variant?: 'slim' | 'simple'
+  label?: LabelProps
   imgProps?: Omit<ImageProps, 'src'>
 }
 
-const placeholderImg = '/product-img-placeholder.svg'
-
+const Label: FC<LabelProps> = ({ variant = 'default', text }) => {
+  if (variant === 'out-of-stock')
+    return (
+      <div className="py-1 px-4 bg-black text-white absolute top-4 right-4">
+        {text}
+      </div>
+    )
+  if (variant === 'discount')
+    return (
+      <div className="py-1 px-4 bg-red text-white absolute top-4 right-4">
+        {text}
+      </div>
+    )
+  if (variant === 'default')
+    return (
+      <div className="py-1 px-4 bg-black text-white absolute top-4 right-4">
+        {text}
+      </div>
+    )
+  return null
+}
 const ProductCard: FC<Props> = ({
   className,
   product,
   variant,
   imgProps,
+  label,
   ...props
 }) => (
   <Link href={`/product/${product.slug}`} {...props}>
-    <a className={cn(s.root, { [s.simple]: variant === 'simple' }, className)}>
-      {variant === 'slim' ? (
-        <div className="relative overflow-hidden box-border">
-          <div className="absolute inset-0 flex items-center justify-end mr-8 z-20">
-            <span className="bg-black text-white inline-block p-3 font-bold text-xl break-words">
-              {product.name}
-            </span>
-          </div>
-          {product?.images && (
-            <Image
-              quality="85"
-              src={product.images[0].url || placeholderImg}
-              alt={product.name || 'Product Image'}
-              height={320}
-              width={320}
-              layout="fixed"
-              {...imgProps}
-            />
-          )}
+    <div className="group w-full h-full p-4 flex flex-col items-center space-y-md text-center">
+      <div className="flex relative items-center w-full bg-gray-100">
+        <div style={{ paddingTop: '100%', width: '100%' }} />
+        <Image
+          layout="fill"
+          objectFit="cover"
+          quality="85"
+          src={product.images[0].url || placeholderImg}
+          alt={product.name || 'Product Image'}
+        />
+        <div className="flex justify-center items-center space-x-3 group-hover:bg-opacity-50 bg-opacity-0 transition-colors duration-700 bg-gray-200 absolute left-0 top-0 w-full h-full">
+          <ActionButton
+            tooltip="Quick view"
+            className=" transform translate-y-8 group-hover:translate-y-0  opacity-0 group-hover:opacity-100 transition-all ease-in-out duration-200 delay-100 hover:text-primary"
+          >
+            <Plus />
+          </ActionButton>
+          <ActionButton
+            tooltip="Add to cart"
+            className=" transform translate-y-8 group-hover:translate-y-0  opacity-0 group-hover:opacity-100 transition-all ease-in-out duration-500 delay-100 hover:text-primary"
+          >
+            <Bag />
+          </ActionButton>
+          <ActionButton
+            tooltip="Browse Wishlist"
+            className=" transform translate-y-8 group-hover:translate-y-0  opacity-0 group-hover:opacity-100 transition-all ease-in-out duration-700 delay-100 hover:text-primary"
+          >
+            <Heart />
+          </ActionButton>
         </div>
-      ) : (
-        <>
-          <div className={s.squareBg} />
-          <div className="flex flex-row justify-between box-border w-full z-20 absolute">
-            <div className="absolute top-0 left-0 pr-16 max-w-full">
-              <h3 className={s.productTitle}>
-                <span>{product.name}</span>
-              </h3>
-              <span className={s.productPrice}>
-                {product.price.value}
-                &nbsp;
-                {product.price.currencyCode}
-              </span>
-            </div>
-            {process.env.COMMERCE_WISHLIST_ENABLED && (
-              <WishlistButton
-                className={s.wishlistButton}
-                productId={product.id}
-                variant={product.variants[0] as any}
-              />
-            )}
-          </div>
-          <div className={s.imageContainer}>
-            {product?.images && (
-              <Image
-                alt={product.name || 'Product Image'}
-                className={s.productImage}
-                src={product.images[0].url || placeholderImg}
-                height={540}
-                width={540}
-                quality="85"
-                layout="responsive"
-                {...imgProps}
-              />
-            )}
-          </div>
-        </>
-      )}
-    </a>
+        {label && <Label {...label} />}
+      </div>
+      <h2 className="font-semibold text-xl">{product.name}</h2>
+      <div className="text-accents-5">
+        <span>{product.price.value}</span>{' '}
+        <span>{product.price.currencyCode}</span>
+      </div>
+    </div>
   </Link>
 )
 

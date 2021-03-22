@@ -1,8 +1,9 @@
-import cn from 'classnames'
-import type { GetStaticPropsContext, InferGetStaticPropsType } from 'next'
-import Link from 'next/link'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
+import cn from 'classnames'
+
+import type { GetStaticPropsContext, InferGetStaticPropsType } from 'next'
+import Link from 'next/link'
 
 import { Layout } from '@components/common'
 import { ProductCard } from '@components/product'

@@ -1,11 +1,13 @@
 .input {
-  @apply bg-transparent border-b-2 border-accents-6 px-3 py-2 appearance-none w-full transition duration-150 ease-in-out pr-10;
+  @apply bg-transparent  border-b border-accents-5 px-3 py-2 appearance-none w-full transition duration-150 ease-in-out pr-10;
+}
+.wrap {
+  @apply relative inline-block w-full;
   @screen sm {
     min-width: 120px;
-    max-width: 400px;
+    max-width: 300px;
   }
 }
-
 .input:focus {
   @apply outline-none border-primary text-primary;
 }

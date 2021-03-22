@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from 'react'
+import React, { FC, useCallback, useMemo } from 'react'
 import { ThemeProvider } from 'next-themes'
 
 export interface State {
@@ -159,7 +159,7 @@ export const UIProvider: FC = (props) => {
   const closeDropdown = () => dispatch({ type: 'CLOSE_DROPDOWN' })
 
   const openModal = () => dispatch({ type: 'OPEN_MODAL' })
-  const closeModal = () => dispatch({ type: 'CLOSE_MODAL' })
+  const closeModal = useCallback(() => dispatch({ type: 'CLOSE_MODAL' }), [])
 
   const openToast = () => dispatch({ type: 'OPEN_TOAST' })
   const closeToast = () => dispatch({ type: 'CLOSE_TOAST' })

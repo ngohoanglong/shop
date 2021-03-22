@@ -1,9 +1,11 @@
 .root {
   @apply bg-secondary text-accents-1 cursor-pointer inline-flex px-10 rounded-sm leading-6  transition ease-in-out duration-150 shadow-sm font-semibold text-center justify-center uppercase py-4 border border-transparent items-center;
 }
-
+.root.secondary {
+  @apply bg-transparent text-primary border-primary-2;
+}
 .root:hover {
-  @apply bg-0 text-primary border border-secondary;
+  @apply bg-0 bg-primary text-0 border border-primary-2;
 }
 
 .root:focus {

@@ -12,6 +12,7 @@ import CartSidebarView from '@components/cart/CartSidebarView'
 import LoginView from '@components/auth/LoginView'
 import { CommerceProvider } from '@framework'
 import type { Page } from '@framework/common/get-all-pages'
+import { MenuSidebarView } from '@components/menu'
 
 const Loading = () => (
   <div className="w-80 h-80 flex items-center text-center justify-center p-3">
@@ -67,16 +68,6 @@ const Layout: FC<Props> = ({
         <main className="fit">{children}</main>
         <Footer pages={pageProps.pages} />
 
-        <Modal open={displayModal} onClose={closeModal}>
-          {modalView === 'LOGIN_VIEW' && <LoginView />}
-          {modalView === 'SIGNUP_VIEW' && <SignUpView />}
-          {modalView === 'FORGOT_VIEW' && <ForgotPassword />}
-        </Modal>
-
-        <Sidebar open={displaySidebar} onClose={closeSidebar}>
-          <CartSidebarView />
-        </Sidebar>
-
         <FeatureBar
           title="This site uses cookies to improve your experience. By clicking, you agree to our Privacy Policy."
           hide={acceptedCookies}
@@ -86,6 +77,17 @@ const Layout: FC<Props> = ({
             </Button>
           }
         />
+
+        <Sidebar open={displaySidebar} onClose={closeSidebar}>
+          {modalView === 'CART' && <CartSidebarView />}
+          {modalView === 'MENU' && <MenuSidebarView />}
+        </Sidebar>
+
+        <Modal open={displayModal} onClose={closeModal}>
+          {modalView === 'LOGIN_VIEW' && <LoginView />}
+          {modalView === 'SIGNUP_VIEW' && <SignUpView />}
+          {modalView === 'FORGOT_VIEW' && <ForgotPassword />}
+        </Modal>
       </div>
     </CommerceProvider>
   )

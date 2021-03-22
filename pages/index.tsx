@@ -1,6 +1,6 @@
 import { Layout, Navbar } from '@components/common'
 import HeroSlider from '@components/home/HeroSlider'
-import { Grid, Marquee, Hero, useUI, Container } from '@components/ui'
+import { Container, Button, Input } from '@components/ui'
 import { ProductCard } from '@components/product'
 // import HomeAllProductsGrid from '@components/common/HomeAllProductsGrid'
 import type { GetStaticPropsContext, InferGetStaticPropsType } from 'next'
@@ -9,10 +9,15 @@ import { getConfig } from '@framework/api'
 import getAllProducts from '@framework/product/get-all-products'
 import getSiteInfo from '@framework/common/get-site-info'
 import getAllPages from '@framework/common/get-all-pages'
-import React, { useEffect, useLayoutEffect } from 'react'
+import React, { FC, useLayoutEffect, useState } from 'react'
 import Image from 'next/image'
-import Bestselling from '@components/home/Bestselling'
-
+import ProductSlider from '@components/home/ProductSlider'
+import Title from '@components/home/Title'
+import { Plus } from '@components/icons'
+import { renderToString } from 'react-dom/server'
+import Link from '@components/ui/Link'
+import Countdown from '@components/sections/home/Countdown'
+import Article from '@components/sections/home/Article'
 const placeholderImg = '/product-img-placeholder.svg'
 
 export async function getStaticProps({
@@ -33,8 +38,89 @@ export async function getStaticProps({
   return {
     props: {
       products,
+      hero: [
+        {
+          title: 'Welcome To Helendo Store',
+          subTitle: renderToString(
+            <>
+              CHAIR
+              <br />
+              COLLECTION
+              <br />
+              2020
+            </>
+          ),
+          description: renderToString(
+            <>
+              Many desktop publishing packages and web page editors now use{' '}
+              <br />
+              Lorem Ipsum as their default model text
+            </>
+          ),
+          path: '#',
+          imageUrl: '/home-default-1.jpg',
+        },
+        ...[products[0], products[1], products[2]].map((p) => ({
+          title: p.name,
+          subTitle: renderToString(
+            <>
+              CHAIR
+              <br />
+              COLLECTION
+              <br />
+              2020
+            </>
+          ),
+          description: p.description,
+          imageUrl: p.images[0].url,
+        })),
+      ],
       categories,
+      featured: [products[0], products[1], products[2]],
+      blogs: [products[0], products[1], products[2]].map((p) => ({
+        ...p,
+        tags: [
+          {
+            path: '/search?q=' + 'October 15, 2020',
+            title: 'October 15, 2020',
+          },
+          { path: '/search?q=' + 'Hastheme', title: 'Hastheme' },
+          { path: '/search?q=' + 'Chair', title: 'Chair' },
+        ],
+      })),
       brands,
+      bestSelling: products.map((p, i) => ({
+        ...p,
+        ...(i === 0
+          ? {
+              label: {
+                position: 'top right',
+                text: 'Out Of Stock',
+                variant: 'out-of-stock',
+              },
+            }
+          : i === 3
+          ? {
+              label: {
+                position: 'top right',
+                text: '-14%',
+                variant: 'discount',
+              },
+            }
+          : {}),
+      })),
+      countdown: {
+        title: renderToString(
+          <>
+            Deco Collection <span className="text-red">50% OFF</span>
+          </>
+        ),
+        content: `The standard chunk of Lorem Ipsum used since the 1500s is
+        reproduced for those. Sections 1.10.32 and 1.10.33 from “de
+        Finibus Bonorum et Malorum`,
+        date: 'Jan 5, 2022 15:37:25',
+        path: '#',
+      },
       pages,
     },
     revalidate: 14400,
@@ -42,67 +128,152 @@ export async function getStaticProps({
 }
 
 export default function Home({
-  products,
-  brands,
-  categories,
+  hero,
+  featured,
+  countdown,
+  bestSelling,
+  blogs,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
       <HeroSlider>
-        <div key={0}>
-          <div className="flex items-center justify-center h-full w-screen lg:h-screen lg:py-32 flex-shrink-0 flex-col py-16 bg-gray-100  relative">
-            <Container className="w-full relative h-96 px-6 flex flex-col justify-center">
-              <h4 className="font-bold text-primary mb-2 lg:text-lg xl:text-xl text-sm max-w-xs">
-                CHAIR <br /> COLLECTION <br /> 2020
-              </h4>
-              <h1
-                style={{ paddingBottom: '0.3em' }}
-                className="text-3xl lg:text-5xl xl:text-6xl  max-w-sm lg:max-w-xl xl:max-w-2xl"
-              >
-                Welcome To <br />
-                Helendo Store
-              </h1>
-              <div className="w-full">
-                <div
-                  style={{ width: '7em' }}
-                  className="border-b-4 border-primary"
-                />
-                <p className="mt-6 max-w-sm lg:max-w-lg xl:max-w-xl lg:text-lg xl:text-xl">
-                  Many desktop publishing packages and web page editors now use{' '}
-                  <br />
-                  Lorem Ipsum as their default model text
-                </p>
-              </div>
-              <div className="mt-6">
-                <div className="px-4 bg-black py-2 text-white inline-flex items-center">
-                  Shop now{' '}
-                  <svg
-                    className="inline-block ml-2 text-xl"
-                    stroke="currentColor"
-                    fill="none"
-                    strokeWidth={0}
-                    viewBox="0 0 24 24"
-                    height="1em"
-                    width="1em"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M17 8l4 4m0 0l-4 4m4-4H3"
-                    />
-                  </svg>
-                </div>
-              </div>
-            </Container>
-          </div>
-        </div>
-        {new Array(3).fill(products).map((products, i) => {
-          const product = products[i]
+        {hero.map((item, i) => {
           return (
             <div key={i + 1}>
               <div className="flex items-center justify-center w-screen lg:h-screen lg:py-32 flex-shrink-0 flex-col py-20 bg-0 relative">
+                {i === 0 ? (
+                  <Image
+                    layout="fill"
+                    className="absolute right-0 top-0 flex bg-0 items-center w-screen h-full"
+                    src={item.imageUrl || placeholderImg}
+                    alt={'Product Image'}
+                  />
+                ) : (
+                  <div className="absolute right-0 top-0 flex bg-0 items-center w-1/2 h-full object-cover">
+                    <Image
+                      layout="fill"
+                      objectFit="contain"
+                      quality="85"
+                      src={item.imageUrl || placeholderImg}
+                      alt={item.title || 'Product Image'}
+                    />
+                  </div>
+                )}
+                <Container className="w-full relative h-96 px-6 flex flex-col justify-center">
+                  <Title
+                    subTitle={
+                      <span
+                        dangerouslySetInnerHTML={{
+                          __html: item.subTitle as string,
+                        }}
+                      ></span>
+                    }
+                  >
+                    {item.title}
+                  </Title>
+                  <div className="w-full">
+                    <p
+                      className="mt-6 max-w-sm lg:max-w-lg xl:max-w-xl lg:text-lg xl:text-xl"
+                      dangerouslySetInnerHTML={{ __html: item.description }}
+                    ></p>
+                  </div>
+                  <div className="mt-6">
+                    <Link href={'#'}>
+                      <Button>
+                        Shop now{' '}
+                        <svg
+                          className="inline-block ml-2 text-xl"
+                          stroke="currentColor"
+                          fill="none"
+                          strokeWidth={0}
+                          viewBox="0 0 24 24"
+                          height="1em"
+                          width="1em"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M17 8l4 4m0 0l-4 4m4-4H3"
+                          />
+                        </svg>
+                      </Button>
+                    </Link>
+                  </div>
+                </Container>
+              </div>
+            </div>
+          )
+        })}
+      </HeroSlider>
+      {featured &&
+        featured.map((product, i) => {
+          const left = i % 2 === 0
+          if (left) {
+            return (
+              <Container key={i + 1} className="bg-0">
+                <div className="flex items-center w-full lg:py-6 flex-shrink-0 flex-col md:flex-row bg-0 relative">
+                  <div className="flex bg-0 relative items-center lg:w-1/2 w-full h-full object-cover">
+                    <div style={{ paddingTop: '100%', width: '100%' }} />
+                    <Image
+                      layout="fill"
+                      objectFit="contain"
+                      quality="85"
+                      src={product.images[0].url || placeholderImg}
+                      alt={product.name || 'Product Image'}
+                    />
+                  </div>
+                  <div className="relative lg:w-1/2 w-full flex flex-col justify-center">
+                    <Title small subTitle="FEATURED PRODUCT">
+                      {product.name}
+                    </Title>
+                    <div className="w-full">
+                      <p
+                        className="mt-6 max-w-sm lg:mx-w-lg xl:max-w-xl lg:text-lg xl:text-xl"
+                        dangerouslySetInnerHTML={{
+                          __html: product.description,
+                        }}
+                      ></p>
+                    </div>
+                    <div className="mt-6">
+                      <Link href={product.path || '#'}>
+                        <Button secondary variant="slim">
+                          Only
+                          <span>
+                            {' '}
+                            {product.price.value}
+                            &nbsp;
+                            {product.price.currencyCode}
+                          </span>
+                          <svg
+                            className="inline-block ml-2 text-xl"
+                            stroke="currentColor"
+                            fill="none"
+                            strokeWidth={0}
+                            viewBox="0 0 24 24"
+                            height="1em"
+                            width="1em"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M17 8l4 4m0 0l-4 4m4-4H3"
+                            />
+                          </svg>
+                        </Button>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </Container>
+            )
+          }
+          return (
+            <div key={i + 1}>
+              <div className="flex items-center justify-center w-full lg:h-screen lg:py-32 flex-shrink-0 flex-col py-20 bg-0 relative">
                 <div className="absolute right-0 top-0 flex bg-0 items-center w-1/2 h-full object-cover">
                   <Image
                     layout="fill"
@@ -112,21 +283,11 @@ export default function Home({
                     alt={product.name || 'Product Image'}
                   />
                 </div>
-                <Container className="w-full relative h-96 px-6 flex flex-col justify-center">
-                  <h4 className="font-bold text-primary mb-2 lg:text-lg xl:text-xl text-sm max-w-xs">
-                    CHAIR COLLECTION 2020
-                  </h4>
-                  <h1
-                    style={{ paddingBottom: '0.3em' }}
-                    className="text-3xl lg:text-5xl xl:text-6xl max-w-sm lg:max-w-xl xl:max-w-2xl"
-                  >
+                <Container className="w-full relative px-6 flex flex-col justify-center">
+                  <Title small subTitle="FEATURED PRODUCT">
                     {product.name}
-                  </h1>
+                  </Title>
                   <div className="w-full">
-                    <div
-                      style={{ width: '7em' }}
-                      className="border-b-4 border-primary"
-                    />
                     <p className="mt-6 max-w-sm lg:max-w-lg xl:max-w-xl lg:text-lg xl:text-xl">
                       Many desktop publishing packages and web page editors now
                       use <br />
@@ -134,73 +295,7 @@ export default function Home({
                     </p>
                   </div>
                   <div className="mt-6">
-                    <div className="px-4 bg-black py-2 text-white inline-flex items-center">
-                      Shop now{' '}
-                      <svg
-                        className="inline-block ml-2 text-xl"
-                        stroke="currentColor"
-                        fill="none"
-                        strokeWidth={0}
-                        viewBox="0 0 24 24"
-                        height="1em"
-                        width="1em"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M17 8l4 4m0 0l-4 4m4-4H3"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                </Container>
-              </div>
-            </div>
-          )
-        })}
-      </HeroSlider>
-      {new Array(3).fill(products).map((products, i) => {
-        const product = products[i]
-        const left = i % 2 === 0
-        if (left) {
-          return (
-            <Container key={i + 1} className="bg-0">
-              <div className="flex items-center w-full  lg:py-6 flex-shrink-0 flex-col md:flex-row bg-0 relative">
-                <div className="flex bg-0 relative items-center lg:w-1/2 w-full h-full object-cover">
-                  <div style={{ paddingTop: '100%', width: '100%' }} />
-                  <Image
-                    layout="fill"
-                    objectFit="contain"
-                    quality="85"
-                    src={product.images[0].url || placeholderImg}
-                    alt={product.name || 'Product Image'}
-                  />
-                </div>
-                <div className="relative lg:w-1/2 w-full flex flex-col justify-center">
-                  <h4 className="text-gray-500 mb-2 lg:text-sm xl:text-lg text-xs max-w-xs">
-                    CHAIR COLLECTION 2020
-                  </h4>
-                  <h1
-                    style={{ paddingBottom: '0.3em' }}
-                    className=" text-xl lg:text-3xl xl:text-4xl max-w-sm lg:max-w-xl xl:max-w-2xl"
-                  >
-                    {product.name}
-                  </h1>
-                  <div className="w-full">
-                    <div
-                      style={{ width: '7em' }}
-                      className="border-b-4 border-primary"
-                    />
-                    <p className="mt-6 max-w-sm lg:max-w-lg xl:max-w-xl text-sm  xl:text-lg">
-                      Many desktop publishing packages and web page editors now
-                      use <br />
-                      Lorem Ipsum as their default model text
-                    </p>
-                  </div>
-                  <div className="mt-6">
-                    <div className="px-4 border-primary border py-2 text-primary inline-flex items-center">
+                    <Button secondary variant="slim">
                       Only
                       <span>
                         {' '}
@@ -225,81 +320,97 @@ export default function Home({
                           d="M17 8l4 4m0 0l-4 4m4-4H3"
                         />
                       </svg>
-                    </div>
+                    </Button>
                   </div>
-                </div>
+                </Container>
               </div>
-            </Container>
-          )
-        }
-        return (
-          <div key={i + 1}>
-            <div className="flex items-center justify-center w-full lg:h-screen lg:py-32 flex-shrink-0 flex-col py-20 bg-0 relative">
-              <div className="absolute right-0 top-0 flex bg-0 items-center w-1/2 h-full object-cover">
-                <Image
-                  layout="fill"
-                  objectFit="contain"
-                  quality="85"
-                  src={product.images[0].url || placeholderImg}
-                  alt={product.name || 'Product Image'}
-                />
-              </div>
-              <Container className="w-full relative px-6 flex flex-col justify-center">
-                <h4 className="text-gray-500 mb-2 lg:text-sm xl:text-lg text-xs max-w-xs">
-                  CHAIR COLLECTION 2020
-                </h4>
-                <h1
-                  style={{ paddingBottom: '0.3em' }}
-                  className=" text-xl lg:text-3xl xl:text-4xl max-w-sm lg:max-w-xl xl:max-w-2xl"
-                >
-                  {product.name}
-                </h1>
-                <div className="w-full">
-                  <div
-                    style={{ width: '7em' }}
-                    className="border-b-4 border-primary"
-                  />
-                  <p className="mt-6 max-w-sm lg:max-w-lg xl:max-w-xl lg:text-lg xl:text-xl">
-                    Many desktop publishing packages and web page editors now
-                    use <br />
-                    Lorem Ipsum as their default model text
-                  </p>
-                </div>
-                <div className="mt-6">
-                  <div className="px-4 border-primary border py-2 text-primary inline-flex items-center">
-                    Only
-                    <span>
-                      {' '}
-                      {product.price.value}
-                      &nbsp;
-                      {product.price.currencyCode}
-                    </span>
-                    <svg
-                      className="inline-block ml-2 text-xl"
-                      stroke="currentColor"
-                      fill="none"
-                      strokeWidth={0}
-                      viewBox="0 0 24 24"
-                      height="1em"
-                      width="1em"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M17 8l4 4m0 0l-4 4m4-4H3"
-                      />
-                    </svg>
-                  </div>
-                </div>
-              </Container>
             </div>
+          )
+        })}
+      <Container className="py-6 lg:py-12 space-y-6 lg:space-y-10">
+        <Title small center>
+          Best selling
+        </Title>
+        <ProductSlider>
+          {bestSelling.map((product, i) => {
+            return (
+              <ProductCard
+                key={i}
+                label={product.label as any}
+                product={product}
+              />
+            )
+          })}
+        </ProductSlider>
+      </Container>
+      {countdown && (
+        <div className="flex items-center justify-center w-full lg:h-screen lg:py-32 flex-shrink-0 flex-col py-16 bg-gray-100 relative">
+          <div className="absolute right-0 top-0 flex bg-0 items-center w-full h-full">
+            <img
+              className="object-cover h-full"
+              src={
+                'https://live.hasthemes.com/html/7/helendo-preview/helendo/assets/images/bg/h1-countdown.jpg'
+              }
+              alt={'Product Image'}
+            />
           </div>
-        )
-      })}
-      <Container>
-        <Bestselling />
+          <Container className="w-full relative h-96 px-6 flex flex-col justify-center">
+            <Title small>
+              <span dangerouslySetInnerHTML={{ __html: countdown.title }} />
+            </Title>
+            <p className="mt-6 max-w-sm lg:max-w-md xl:max-w-lg lg:text-md xl:text-lg">
+              {countdown.content}
+            </p>
+            <Countdown date={countdown.date} />
+            <div className="mt-6 xlmt-10">
+              <Link href={countdown.path}>
+                <Button>
+                  Shop now{' '}
+                  <svg
+                    className="inline-block ml-2 text-xl"
+                    stroke="currentColor"
+                    fill="none"
+                    strokeWidth={0}
+                    viewBox="0 0 24 24"
+                    height="1em"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M17 8l4 4m0 0l-4 4m4-4H3"
+                    />
+                  </svg>
+                </Button>
+              </Link>
+            </div>
+          </Container>
+        </div>
+      )}
+      <Container className="py-6 lg:py-12 space-y-6 lg:space-y-10">
+        <Title small center>
+          Our Blog
+        </Title>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:flex-row gap-4 mt-6">
+          {blogs.map((article, i) => {
+            return <Article key={i} article={article} tags={article?.tags} />
+          })}
+        </div>
+      </Container>
+      <Container className="py-6 lg:py-12 flex flex-col md:flex-row">
+        <div>
+          <Title small>Our Newsletter</Title>
+        </div>
+        <div className="w-0 md:w-10"></div>
+        <div className="flex-1 flex justify-end pb-3">
+          <Input
+            placeholder="Your email address"
+            className="h-full w-full max-w-md"
+          ></Input>
+          <Button variant="slim">Subscribe</Button>
+        </div>
       </Container>
     </>
   )
