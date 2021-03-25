@@ -74,9 +74,9 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
         }}
       />
       <div className="bg-1">
-        <Container className="py-12 flex space-x-3 items-baseline">
-          <h2 className="text-3xl font-semibold">Wooden chair</h2>
-          <div className="flex space-x-2 flex-1 font-semibold justify-end">
+        <Container className="py-12 flex items-center flex-col md:flex-row space-x-3 md:items-baseline">
+          <h2 className="text-3xl py-1 font-semibold">Wooden chair</h2>
+          <div className="flex py-1 space-x-2 flex-1 font-semibold justify-end">
             <div>HOME</div>
             <div className="text-accents-6">/</div>
             <div className="text-accents-6">FURNITURE</div>
@@ -109,7 +109,7 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
                             />
                           </div>
                         </div>
-                        <div className="group-hover:opacity-100 pointer-events-none group-focus:opacity-100 opacity-0 right-0 top-0 absolute w-5/6">
+                        <div className="group-hover:opacity-100 hidden group-hover:block group-focus:opacity-100 opacity-0 right-0 top-0 absolute w-5/6">
                           <div
                             className="w-full bg-gray-200"
                             style={{ paddingTop: '100%' }}
@@ -161,14 +161,14 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
             <span>{product.price.value}</span>{' '}
             <span>{product.price.currencyCode}</span>
           </div>
-          <section className="space-y-4">
-            <div className="break-words w-full max-w-xl">
-              <Text html={product.description} />
-            </div>
+          <div className="break-words w-full max-w-xl">
+            <Text html={product.description} />
+          </div>
+          <div className="space-y-4">
             {product.options?.map((opt) => (
-              <div className="pb-4" key={opt.displayName}>
+              <div className="space-y-2" key={opt.displayName}>
                 <h2 className="uppercase font-medium">{opt.displayName}</h2>
-                <div className="flex flex-row flex-wrap py-4">
+                <div className="flex flex-row flex-wrap space-y-2 space-y-reverse">
                   {opt.values.map((v, i: number) => {
                     const active = (choices as any)[
                       opt.displayName.toLowerCase()
@@ -192,10 +192,12 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
                       />
                     )
                   })}
+                  <div />
                 </div>
               </div>
             ))}
-          </section>
+          </div>
+
           <div className="flex flex-wrap lg:flex-nowrap justify-between">
             <div className="bg-1 border border-2 flex focus-within:shadow-outline-normal items-stretch">
               <div className="cursor-pointer hover:shadow-outline-normal items-center text-lg font-semibold p-3">
@@ -391,7 +393,15 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
             </div>
           </TabPanel>
           <TabPanel>
-            <h2>Any content 2</h2>
+            <div className="grid grid-cols-2 gap-3 md:gap-6 max-w-lg">
+              <div className="col-span-full md:col-span-1">
+                <span className="font-semibold">Weight</span> 1.2 kg
+              </div>
+              <div className="col-span-full md:col-span-1">
+                <span className="font-semibold">Dimensions</span> 12 × 2 × 1.5
+                cm
+              </div>
+            </div>
           </TabPanel>
           <TabPanel>
             <h2>Any content 3</h2>
