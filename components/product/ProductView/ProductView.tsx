@@ -74,7 +74,7 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
         }}
       />
       <div className="bg-1">
-        <Container className="py-12 flex items-center flex-col md:flex-row space-x-3 md:items-baseline">
+        <Container className="py-6 md:py-12 flex items-center flex-col md:flex-row md:space-x-3 md:items-baseline">
           <h2 className="text-3xl py-1 font-semibold">Wooden chair</h2>
           <div className="flex py-1 space-x-2 flex-1 font-semibold justify-end">
             <div>HOME</div>
@@ -234,7 +234,7 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
           </div>
           <div className="space-y-2 text-lg font-semibold ">
             <div className="flex items-baseline space-x-3">
-              <div>SKU:</div> <div>502</div>
+              <div>SKU:</div> <div className="text-accents-6">502</div>
             </div>
             <div className="flex items-baseline space-x-3">
               <div>Categories:</div>{' '}
@@ -404,7 +404,84 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
             </div>
           </TabPanel>
           <TabPanel>
-            <h2>Any content 3</h2>
+            <Text variant="sectionHeading">
+              Be the first to review “Wooden chair”
+            </Text>
+            <div className="grid grid-cols-2 gap-6 max-w-lg">
+              <label className="block col-span-full md:col-span-1">
+                <span className="text-gray-700">Your rating</span>
+                <div className="flex items-center mt-1">
+                  <svg
+                    className="mx-1 w-4 h-4 fill-current text-yellow-500"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                  </svg>
+                  <svg
+                    className="mx-1 w-4 h-4 fill-current text-yellow-500"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                  </svg>
+                  <svg
+                    className="mx-1 w-4 h-4 fill-current text-yellow-500"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                  </svg>
+                  <svg
+                    className="mx-1 w-4 h-4 fill-current text-yellow-500"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                  </svg>
+                  <svg
+                    className="mx-1 w-4 h-4 fill-current text-gray-400"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                  </svg>
+                </div>
+              </label>
+
+              <label className="block col-span-full">
+                <span className="text-gray-700">
+                  Your review <span>*</span>
+                </span>
+                <textarea
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  rows={4}
+                ></textarea>
+              </label>
+              <label className="block col-span-full md:col-span-1">
+                <span className="text-gray-700">
+                  Your Name <span>*</span>
+                </span>
+                <input
+                  type="email"
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  placeholder="john@example.com"
+                />
+              </label>
+              <label className="bloc col-span-full md:col-span-1">
+                <span className="text-gray-700">
+                  Your Email <span>*</span>
+                </span>
+                <input
+                  type="email"
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  placeholder="john@example.com"
+                />
+              </label>
+              <div className="block col-span-full mb-6">
+                <Button variant="slim">Submit</Button>
+              </div>
+            </div>
           </TabPanel>
         </Tabs>
       </Container>
