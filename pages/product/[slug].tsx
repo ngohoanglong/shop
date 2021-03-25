@@ -1,16 +1,16 @@
+import { Layout } from '@components/common'
+import { ProductView } from '@components/product'
+import { getConfig } from '@framework/api'
+import getAllPages from '@framework/common/get-all-pages'
+import getAllProductPaths from '@framework/product/get-all-product-paths'
+import getAllProducts from '@framework/product/get-all-products'
+import getProduct from '@framework/product/get-product'
 import type {
   GetStaticPathsContext,
   GetStaticPropsContext,
   InferGetStaticPropsType,
 } from 'next'
 import { useRouter } from 'next/router'
-import { Layout } from '@components/common'
-import { ProductView } from '@components/product'
-
-import { getConfig } from '@framework/api'
-import getProduct from '@framework/product/get-product'
-import getAllPages from '@framework/common/get-all-pages'
-import getAllProductPaths from '@framework/product/get-all-product-paths'
 
 export async function getStaticProps({
   params,
@@ -24,7 +24,11 @@ export async function getStaticProps({
     config,
     preview,
   })
-
+  const { products } = await getAllProducts({
+    variables: { first: 12 },
+    config,
+    preview,
+  })
   if (!product) {
     throw new Error(`Product with slug '${params!.slug}' not found`)
   }
@@ -33,6 +37,7 @@ export async function getStaticProps({
     props: {
       pages,
       product,
+      relatedProducts: products,
     },
     revalidate: 200,
   }
@@ -57,13 +62,14 @@ export async function getStaticPaths({ locales }: GetStaticPathsContext) {
 
 export default function Slug({
   product,
+  relatedProducts,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const router = useRouter()
 
   return router.isFallback ? (
     <h1>Loading...</h1> // TODO (BC) Add Skeleton Views
   ) : (
-    <ProductView product={product as any} />
+    <ProductView product={product as any} relatedProducts={relatedProducts} />
   )
 }
 

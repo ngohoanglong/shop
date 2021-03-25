@@ -1,23 +1,22 @@
 import { Layout, Navbar } from '@components/common'
 import HeroSlider from '@components/home/HeroSlider'
-import { Container, Button, Input } from '@components/ui'
-import { ProductCard } from '@components/product'
-// import HomeAllProductsGrid from '@components/common/HomeAllProductsGrid'
-import type { GetStaticPropsContext, InferGetStaticPropsType } from 'next'
-
-import { getConfig } from '@framework/api'
-import getAllProducts from '@framework/product/get-all-products'
-import getSiteInfo from '@framework/common/get-site-info'
-import getAllPages from '@framework/common/get-all-pages'
-import React, { FC, useLayoutEffect, useState } from 'react'
-import Image from 'next/image'
 import ProductSlider from '@components/home/ProductSlider'
 import Title from '@components/home/Title'
-import { Plus } from '@components/icons'
-import { renderToString } from 'react-dom/server'
-import Link from '@components/ui/Link'
-import Countdown from '@components/sections/home/Countdown'
+import { ProductCard } from '@components/product'
 import Article from '@components/sections/home/Article'
+import Countdown from '@components/sections/home/Countdown'
+import { Button, Container, Input } from '@components/ui'
+import Link from '@components/ui/Link'
+import { getConfig } from '@framework/api'
+import getAllPages from '@framework/common/get-all-pages'
+import getSiteInfo from '@framework/common/get-site-info'
+import getAllProducts from '@framework/product/get-all-products'
+// import HomeAllProductsGrid from '@components/common/HomeAllProductsGrid'
+import type { GetStaticPropsContext, InferGetStaticPropsType } from 'next'
+import Image from 'next/image'
+import React from 'react'
+import { renderToString } from 'react-dom/server'
+
 const placeholderImg = '/product-img-placeholder.svg'
 
 export async function getStaticProps({
@@ -143,8 +142,9 @@ export default function Home({
               <div className="flex items-center justify-center w-screen lg:h-screen lg:py-32 flex-shrink-0 flex-col py-20 bg-0 relative">
                 {i === 0 ? (
                   <Image
+                    quality="100"
                     layout="fill"
-                    className="absolute right-0 top-0 flex bg-0 items-center w-screen h-full"
+                    className="absolute object-cover right-0 top-0 flex bg-0 items-center w-screen h-full"
                     src={item.imageUrl || placeholderImg}
                     alt={'Product Image'}
                   />
@@ -273,7 +273,7 @@ export default function Home({
           }
           return (
             <div key={i + 1}>
-              <div className="flex items-center justify-center w-full lg:h-screen lg:py-32 flex-shrink-0 flex-col py-20 bg-0 relative">
+              <div className="flex items-center justify-center w-full  lg:py-32 flex-shrink-0 flex-col py-20 bg-0 relative">
                 <div className="absolute right-0 top-0 flex bg-0 items-center w-1/2 h-full object-cover">
                   <Image
                     layout="fill"
@@ -344,13 +344,13 @@ export default function Home({
         </ProductSlider>
       </Container>
       {countdown && (
-        <div className="flex items-center justify-center w-full lg:h-screen lg:py-32 flex-shrink-0 flex-col py-16 bg-gray-100 relative">
+        <div className="flex items-center justify-center w-full  lg:py-32 flex-shrink-0 flex-col py-16 bg-2 relative">
           <div className="absolute right-0 top-0 flex bg-0 items-center w-full h-full">
-            <img
+            <Image
+              layout="fill"
+              objectFit="cover"
               className="object-cover h-full"
-              src={
-                'https://live.hasthemes.com/html/7/helendo-preview/helendo/assets/images/bg/h1-countdown.jpg'
-              }
+              src={'/countdown.jpg'}
               alt={'Product Image'}
             />
           </div>

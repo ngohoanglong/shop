@@ -1,6 +1,10 @@
 .root {
   @apply relative;
   display: flex;
+  & svg {
+    font-size: 1.6rem;
+    stroke-width: 1.2;
+  }
 }
 
 .list {

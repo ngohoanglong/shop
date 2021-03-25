@@ -1,3 +1,29 @@
 .root {
   @apply fixed inset-0 overflow-hidden h-full z-50;
 }
+.sidebar {
+  animation: sidebaranimationOpen 300ms ease-in-out;
+}
+.sidebarClose {
+  animation: sidebaranimationClose 300ms ease-in-out;
+}
+@keyframes sidebaranimationOpen {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes sidebaranimationClose {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}

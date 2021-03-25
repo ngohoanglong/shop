@@ -1,9 +1,9 @@
-import { FC } from 'react'
-import Link from 'next/link'
-import { Logo, Container } from '@components/ui'
 import { Searchbar, UserNav } from '@components/common'
-import NavbarRoot from './NavbarRoot'
+import { Container } from '@components/ui'
+import Link from 'next/link'
+import { FC } from 'react'
 import s from './Navbar.module.css'
+import NavbarRoot from './NavbarRoot'
 export interface Props {
   transparent?: boolean
 }

@@ -43,7 +43,7 @@ const Article: React.FC<Props> = ({ article, tags }) => (
       <div className="flex space-x-3 text-accents-5">
         {tags[0] && (
           <Link href={tags[0].path}>
-            <div className="hover:underline">
+            <div className="hover:underline hover:text-primary">
               <span>{tags[0].title}</span>
             </div>
           </Link>
@@ -51,7 +51,7 @@ const Article: React.FC<Props> = ({ article, tags }) => (
         {tags[0] && <div>/</div>}
         {tags[1] && (
           <Link href={tags[1].path}>
-            <div className="hover:underline">
+            <div className="hover:underline hover:text-primary">
               <span>{tags[1].title}</span>
             </div>
           </Link>

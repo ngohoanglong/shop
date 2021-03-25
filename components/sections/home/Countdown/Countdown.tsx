@@ -1,4 +1,4 @@
-import React, { FC, useLayoutEffect, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import s from './Countdown.module.css'
 interface Props {
   date: string
@@ -6,7 +6,7 @@ interface Props {
 const Countdown: FC<Props> = ({ date }) => {
   const [[days, hours, minutes, seconds], setCountdown] = useState([0, 0, 0, 0])
   const [EXPIRED, setEXPIRED] = useState(false)
-  useLayoutEffect(() => {
+  useEffect(() => {
     let countDownDate = new Date(date).getTime()
     // Update the count down every 1 second
     let x = setInterval(function () {

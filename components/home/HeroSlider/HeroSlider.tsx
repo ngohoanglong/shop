@@ -1,14 +1,13 @@
+import cn from 'classnames'
 import { useKeenSlider } from 'keen-slider/react'
 import React, {
   Children,
   FC,
   isValidElement,
-  useState,
-  useRef,
   useEffect,
+  useRef,
+  useState,
 } from 'react'
-import cn from 'classnames'
-
 import s from './HeroSlider.module.css'
 
 const HeroSlider: FC = ({ children }) => {
