@@ -97,7 +97,10 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
                           className="w-full border border-accents-2 relative hover:border-primary border-2 "
                           style={{ paddingTop: '100%' }}
                         >
-                          <div className="background-200 absolute left-0 top-0 w-full h-full flex-1 fadeIn animated">
+                          <div
+                            key={image.url}
+                            className="background-200 absolute left-0 top-0 w-full h-full flex-1 fadeIn animated"
+                          >
                             <Image
                               src={image.url!}
                               alt={image.alt || 'Product Image'}
