@@ -1,5 +1,5 @@
 .root {
-  @apply relative w-14 h-14 bg-0 flex justify-center items-center text-2xl rounded-full  delay-100 hover:text-primary;
+  @apply relative w-14 h-14 bg-accents-0 flex justify-center items-center text-2xl rounded-full  delay-100 hover:text-primary;
   &.large {
     @apply w-16 h-16;
   }

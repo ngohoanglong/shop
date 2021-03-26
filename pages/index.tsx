@@ -139,17 +139,17 @@ export default function Home({
         {hero.map((item, i) => {
           return (
             <div key={i + 1}>
-              <div className="flex items-center justify-center w-screen lg:h-screen lg:py-32 flex-shrink-0 flex-col py-20 bg-0 relative">
+              <div className="flex items-center justify-center w-screen lg:h-screen lg:py-32 flex-shrink-0 flex-col py-20 bg-accents-0 relative">
                 {i === 0 ? (
                   <Image
                     quality="100"
                     layout="fill"
-                    className="absolute object-cover right-0 top-0 flex bg-0 items-center w-screen h-full"
+                    className="absolute object-cover right-0 top-0 flex bg-accents-0 items-center w-screen h-full"
                     src={item.imageUrl || placeholderImg}
                     alt={'Product Image'}
                   />
                 ) : (
-                  <div className="absolute right-0 top-0 flex bg-0 items-center w-1/2 h-full object-cover">
+                  <div className="absolute right-0 top-0 flex bg-accents-0 items-center w-1/2 h-full object-cover">
                     <Image
                       layout="fill"
                       objectFit="contain"
@@ -212,9 +212,9 @@ export default function Home({
           const left = i % 2 === 0
           if (left) {
             return (
-              <Container key={i + 1} className="bg-0">
-                <div className="flex items-center w-full lg:py-6 flex-shrink-0 flex-col md:flex-row bg-0 relative">
-                  <div className="flex bg-0 relative items-center lg:w-1/2 w-full h-full object-cover">
+              <Container key={i + 1} className="bg-accents-0">
+                <div className="flex items-center w-full lg:py-6 flex-shrink-0 flex-col md:flex-row bg-accents-0 relative">
+                  <div className="flex bg-accents-0 relative items-center lg:w-1/2 w-full h-full object-cover">
                     <div style={{ paddingTop: '100%', width: '100%' }} />
                     <Image
                       layout="fill"
@@ -273,8 +273,8 @@ export default function Home({
           }
           return (
             <div key={i + 1}>
-              <div className="flex items-center justify-center w-full  lg:py-32 flex-shrink-0 flex-col py-20 bg-0 relative">
-                <div className="absolute right-0 top-0 flex bg-0 items-center w-1/2 h-full object-cover">
+              <div className="flex items-center justify-center w-full  lg:py-32 flex-shrink-0 flex-col py-20 bg-accents-0 relative">
+                <div className="absolute right-0 top-0 flex bg-accents-0 items-center w-1/2 h-full object-cover">
                   <Image
                     layout="fill"
                     objectFit="contain"
@@ -344,8 +344,8 @@ export default function Home({
         </ProductSlider>
       </Container>
       {countdown && (
-        <div className="flex items-center justify-center w-full  lg:py-32 flex-shrink-0 flex-col py-16 bg-2 relative">
-          <div className="absolute right-0 top-0 flex bg-0 items-center w-full h-full">
+        <div className="flex items-center justify-center w-full  lg:py-32 flex-shrink-0 flex-col py-16 bg-accents-2 relative">
+          <div className="absolute right-0 top-0 flex bg-accents-0 items-center w-full h-full">
             <Image
               layout="fill"
               objectFit="cover"

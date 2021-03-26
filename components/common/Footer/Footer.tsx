@@ -1,12 +1,12 @@
-import { FC } from 'react'
+import { I18nWidget } from '@components/common'
+import { Github, Vercel } from '@components/icons'
+import { Container, Logo } from '@components/ui'
+import type { Page } from '@framework/common/get-all-pages'
+import getSlug from '@lib/get-slug'
 import cn from 'classnames'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import type { Page } from '@framework/common/get-all-pages'
-import getSlug from '@lib/get-slug'
-import { Github, Vercel } from '@components/icons'
-import { Logo, Container } from '@components/ui'
-import { I18nWidget } from '@components/common'
+import { FC } from 'react'
 import s from './Footer.module.css'
 
 interface Props {
@@ -24,7 +24,7 @@ const Footer: FC<Props> = ({ className, pages }) => {
   return (
     <footer className={rootClassName}>
       <Container>
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 border-b border-accents-2 py-12  bg-0 transition-colors duration-150">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 border-b border-accents-2 py-12  bg-accents-0 transition-colors duration-150">
           <div className="col-span-1 lg:col-span-2">
             <Link href="/">
               <a className="flex flex-initial items-center font-bold md:mr-24">

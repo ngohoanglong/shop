@@ -1,16 +1,15 @@
-import { FC, useState } from 'react'
-import cn from 'classnames'
-import Link from 'next/link'
-import Image from 'next/image'
-import s from './WishlistCard.module.css'
+import type { Product } from '@commerce/types'
 import { Trash } from '@components/icons'
 import { Button, Text } from '@components/ui'
-
 import { useUI } from '@components/ui/context'
-import type { Product } from '@commerce/types'
-import usePrice from '@framework/product/use-price'
 import useAddItem from '@framework/cart/use-add-item'
+import usePrice from '@framework/product/use-price'
 import useRemoveItem from '@framework/wishlist/use-remove-item'
+import cn from 'classnames'
+import Image from 'next/image'
+import Link from 'next/link'
+import { FC, useState } from 'react'
+import s from './WishlistCard.module.css'
 
 interface Props {
   product: Product
@@ -78,7 +77,7 @@ const WishlistCard: FC<Props> = ({ product }) => {
           aria-label="Add to Cart"
           type="button"
           className={
-            'py-1 px-3 border border-secondary rounded-md shadow-sm hover:bg-3-hover'
+            'py-1 px-3 border border-secondary rounded-md shadow-sm hover:bg-accents-3-hover'
           }
           onClick={addToCart}
           loading={loading}

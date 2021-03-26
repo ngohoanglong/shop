@@ -47,17 +47,6 @@ module.exports = {
         blue: 'var(--blue)',
         green: 'var(--green)',
         red: 'var(--red)',
-
-        0: 'var(--accents-0)',
-        1: 'var(--accents-1)',
-        2: 'var(--accents-2)',
-        3: 'var(--accents-3)',
-        4: 'var(--accents-4)',
-        5: 'var(--accents-5)',
-        6: 'var(--accents-6)',
-        7: 'var(--accents-7)',
-        8: 'var(--accents-8)',
-        9: 'var(--accents-9)',
       },
       textColor: {
         text: 'var(--text-base)',
@@ -86,11 +75,12 @@ module.exports = {
       },
     },
   },
-  plugins: [require('@tailwindcss/forms')],
+  plugins: [require('@tailwindcss/forms'), require('@tailwindcss/line-clamp')],
   variants: {
     extend: {
       translate: ['active', 'group-hover'],
       display: ['active', 'group-hover'],
     },
+    lineClamp: ['responsive', 'hover', 'focus'],
   },
 }

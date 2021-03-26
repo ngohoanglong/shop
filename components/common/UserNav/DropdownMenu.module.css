@@ -1,5 +1,5 @@
 .dropdownMenu {
-  @apply fixed right-0 mt-2 origin-top-right outline-none bg-2 z-40 w-full h-full;
+  @apply fixed right-0 mt-2 origin-top-right outline-none bg-accents-2 z-40 w-full h-full;
 
   @screen lg {
     @apply absolute top-10 border border-accents-1 shadow-lg w-56 h-auto;
@@ -12,11 +12,11 @@
 }
 
 .link:hover {
-  @apply bg-1 text-primary;
+  @apply bg-accents-1 text-primary;
 }
 
 .link.active {
-  @apply font-bold bg-2;
+  @apply font-bold bg-accents-2;
 }
 
 .off {

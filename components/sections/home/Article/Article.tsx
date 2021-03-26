@@ -3,7 +3,6 @@ import { Plus } from '@components/icons'
 import Link from '@components/ui/Link'
 import Image from 'next/image'
 import React from 'react'
-import s from './Article.module.css'
 const placeholderImg = '/product-img-placeholder.svg'
 interface Props {
   className?: string
@@ -26,7 +25,7 @@ const Article: React.FC<Props> = ({ article, tags }) => (
           alt={article.name || 'Product Image'}
         />
         <div className=" flex justify-center items-center space-x-3  absolute right-0 bottom-0 overflow-hidden">
-          <div className="space-x-2 px-4 translate-x-full group-hover:translate-x-0 transform transition-all duration-500 ease-in-out bg-0 py-3 cursor-pointer leading-none inline-flex items-center">
+          <div className="space-x-2 px-4 translate-x-full group-hover:translate-x-0 transform transition-all duration-500 ease-in-out bg-accents-0 py-3 cursor-pointer leading-none inline-flex items-center">
             <div>Read more</div>
             <div className="translate-x-full group-hover:translate-x-0 transform transition-all duration-1000 ease-in-out ">
               <Plus />

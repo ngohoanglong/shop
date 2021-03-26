@@ -38,7 +38,6 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
 
   // Select the correct variant based on choices
   const variant = getVariant(product, choices)
-
   const addToCart = async () => {
     setLoading(true)
     try {
@@ -73,7 +72,7 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
           ],
         }}
       />
-      <div className="bg-1">
+      <div className="bg-accents-1">
         <Container className="py-6 md:py-12 flex items-center flex-col md:flex-row md:space-x-3 md:items-baseline">
           <h2 className="text-3xl py-1 font-semibold">Wooden chair</h2>
           <div className="flex py-1 space-x-2 flex-1 font-semibold justify-end">
@@ -92,14 +91,14 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
                   const image = arr[i]
                   if (image) {
                     return (
-                      <div key={i} className="flex-1 group pr-3 pb-3">
+                      <div key={i} className="group pr-3 pb-3">
                         <div
-                          className="w-full border border-accents-2 relative hover:border-primary border-2 "
+                          className="w-full  flex relative "
                           style={{ paddingTop: '100%' }}
                         >
                           <div
                             key={image.url}
-                            className="background-200 absolute left-0 top-0 w-full h-full flex-1 fadeIn animated"
+                            className="background-200 border border-accents-2 group-hover:border-primary group-hover:shadow-outline-normal absolute left-0 top-0 w-full h-full flex-1 fadeIn animated"
                           >
                             <Image
                               src={image.url!}
@@ -117,7 +116,7 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
                             className="w-full bg-gray-200"
                             style={{ paddingTop: '100%' }}
                           >
-                            <div className="hover:shadow absolute top-0 right-0 w-full h-full flex-1 border border-gray-300">
+                            <div className="absolute top-0 right-0 w-full h-full flex-1 border border-gray-300">
                               <Image
                                 className={s.img}
                                 src={image.url!}
@@ -164,7 +163,10 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
             <span>{product.price.value}</span>{' '}
             <span>{product.price.currencyCode}</span>
           </div>
-          <div className="break-words w-full max-w-xl">
+          <div
+            tabIndex={-1}
+            className="break-words w-full lg:line-clamp-none hover:line-clamp-none max-w-xl line-clamp-3"
+          >
             <Text html={product.description} />
           </div>
           <div className="space-y-4">
@@ -202,19 +204,19 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
           </div>
 
           <div className="flex flex-wrap lg:flex-nowrap justify-between">
-            <div className="bg-1 border border-2 flex focus-within:shadow-outline-normal items-stretch">
-              <div className="cursor-pointer hover:shadow-outline-normal items-center text-lg font-semibold p-3">
+            <div className="bg-accents-1 border flex focus-within:shadow-outline-normal items-stretch">
+              <button className="z-10 w-10 flex justify-center  cursor-pointer hover:shadow-outline-normal items-center text-lg font-semibold p-3">
                 -
-              </div>
+              </button>
               <input
-                type="text"
+                type="number"
                 pattern="\d*"
                 defaultValue={1}
-                className="flex-1 text-center px-3 w-20 focus:outline-none bg-transparent appearance-none"
+                className="flex-1 appearance-none text-center px-3 w-20 focus:outline-none bg-transparent appearance-none"
               ></input>
-              <div className="cursor-pointer hover:shadow-outline-normal items-center text-lg font-semibold p-3">
+              <button className="z-10 w-10 flex justify-center cursor-pointer hover:shadow-outline-normal items-center text-lg font-semibold p-3">
                 +
-              </div>
+              </button>
             </div>
             <Button
               className="order-1 lg:ml-6 mt-6 lg:mt-0 w-full lg:w-0 m-0 lg:order-none lg:flex-1 flex-none"

@@ -35,13 +35,13 @@
   }
 
   & .name {
-    @apply px-6 py-2 bg-3 text-primary font-bold;
+    @apply px-6 py-2 bg-accents-3 text-primary font-bold;
     font-size: 2rem;
     letter-spacing: 0.4px;
   }
 
   & .price {
-    @apply px-6 py-2 pb-4 bg-3 text-primary font-bold inline-block tracking-wide;
+    @apply px-6 py-2 pb-4 bg-accents-3 text-primary font-bold inline-block tracking-wide;
   }
 
   @screen lg {
@@ -88,7 +88,7 @@
 }
 
 .wishlistButton {
-  @apply absolute z-30 top-6 right-0 bg-3 text-primary w-10 h-10 flex items-center justify-center font-semibold leading-6 cursor-pointer;
+  @apply absolute z-30 top-6 right-0 bg-accents-3 text-primary w-10 h-10 flex items-center justify-center font-semibold leading-6 cursor-pointer;
 
   @screen lg {
     @apply right-12 text-white bg-violet;

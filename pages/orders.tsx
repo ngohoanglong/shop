@@ -1,9 +1,9 @@
-import type { GetStaticPropsContext } from 'next'
-import { Bag } from '@components/icons'
 import { Layout } from '@components/common'
+import { Bag } from '@components/icons'
 import { Container, Text } from '@components/ui'
 import { getConfig } from '@framework/api'
 import getAllPages from '@framework/common/get-all-pages'
+import type { GetStaticPropsContext } from 'next'
 
 export async function getStaticProps({
   preview,
@@ -21,7 +21,7 @@ export default function Orders() {
     <Container>
       <Text variant="pageHeading">My Orders</Text>
       <div className="flex-1 p-24 flex flex-col justify-center items-center ">
-        <span className="border border-dashed border-secondary rounded-full flex items-center justify-center w-16 h-16 p-12 bg-3 text-primary">
+        <span className="border border-dashed border-secondary rounded-full flex items-center justify-center w-16 h-16 p-12 bg-accents-3 text-primary">
           <Bag className="absolute" />
         </span>
         <h2 className="pt-6 text-2xl font-bold tracking-wide text-center">

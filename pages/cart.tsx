@@ -1,12 +1,12 @@
-import type { GetStaticPropsContext } from 'next'
-import { getConfig } from '@framework/api'
-import getAllPages from '@framework/common/get-all-pages'
-import useCart from '@framework/cart/use-cart'
-import usePrice from '@framework/product/use-price'
-import { Layout } from '@components/common'
-import { Button, Text } from '@components/ui'
-import { Bag, Cross, Check, MapPin, CreditCard } from '@components/icons'
 import { CartItem } from '@components/cart'
+import { Layout } from '@components/common'
+import { Bag, Check, CreditCard, Cross, MapPin } from '@components/icons'
+import { Button, Text } from '@components/ui'
+import { getConfig } from '@framework/api'
+import useCart from '@framework/cart/use-cart'
+import getAllPages from '@framework/common/get-all-pages'
+import usePrice from '@framework/product/use-price'
+import type { GetStaticPropsContext } from 'next'
 
 export async function getStaticProps({
   preview,
@@ -42,7 +42,7 @@ export default function Cart() {
       <div className="lg:col-span-8">
         {isLoading || isEmpty ? (
           <div className="flex-1 px-12 py-24 flex flex-col justify-center items-center ">
-            <span className="border border-dashed border-secondary flex items-center justify-center w-16 h-16 bg-3 p-12 rounded-lg text-primary">
+            <span className="border border-dashed border-secondary flex items-center justify-center w-16 h-16 bg-accents-3 p-12 rounded-lg text-primary">
               <Bag className="absolute" />
             </span>
             <h2 className="pt-6 text-2xl font-bold tracking-wide text-center">
@@ -93,7 +93,7 @@ export default function Cart() {
                 {[1, 2, 3, 4, 5, 6].map((x) => (
                   <div
                     key={x}
-                    className="border border-accents-3 w-full h-24 bg-2 bg-opacity-50 transform cursor-pointer hover:scale-110 duration-75"
+                    className="border border-accents-3 w-full h-24 bg-accents-2 bg-opacity-50 transform cursor-pointer hover:scale-110 duration-75"
                   />
                 ))}
               </div>

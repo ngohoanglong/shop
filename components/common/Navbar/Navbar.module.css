@@ -1,10 +1,10 @@
 .root {
-  @apply sticky w-full top-0 bg-0 z-40;
+  @apply sticky w-full top-0 bg-accents-0 z-40;
   &.transparent {
     @apply bg-transparent fixed;
   }
   &.hasScrolled {
-    @apply shadow-magical bg-0;
+    @apply shadow-magical bg-accents-0;
   }
 }
 
