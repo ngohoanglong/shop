@@ -69,7 +69,11 @@ export default function Slug({
   return router.isFallback ? (
     <h1>Loading...</h1> // TODO (BC) Add Skeleton Views
   ) : (
-    <ProductView product={product as any} relatedProducts={relatedProducts} />
+    <ProductView
+      key={product?.entityId}
+      product={product as any}
+      relatedProducts={relatedProducts}
+    />
   )
 }
 
