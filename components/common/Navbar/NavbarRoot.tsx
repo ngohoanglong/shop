@@ -1,6 +1,6 @@
-import { FC, useState, useEffect } from 'react'
-import throttle from 'lodash.throttle'
 import cn from 'classnames'
+import throttle from 'lodash.throttle'
+import { FC, useEffect, useState } from 'react'
 import s from './Navbar.module.css'
 export interface Props {
   transparent?: boolean
@@ -13,12 +13,10 @@ const NavbarRoot: FC<Props> = ({ children, transparent }) => {
       const offset = 0
       const { scrollTop } = document.documentElement
       const scrolled = scrollTop > offset
-
       if (hasScrolled !== scrolled) {
         setHasScrolled(scrolled)
       }
     }, 200)
-
     document.addEventListener('scroll', handleScroll, { passive: true })
     return () => {
       document.removeEventListener('scroll', handleScroll)

@@ -1,13 +1,12 @@
-import { FC } from 'react'
-import Link from 'next/link'
-import s from './MenuSidebarView.module.css'
 import { UserNav } from '@components/common'
-import { useUI } from '@components/ui/context'
 import { Cross } from '@components/icons'
+import { useUI } from '@components/ui/context'
 import type { Page } from '@framework/common/get-all-pages'
-import { useRouter } from 'next/router'
 import getSlug from '@lib/get-slug'
-import { Container } from '@components/ui'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { FC } from 'react'
+import s from './MenuSidebarView.module.css'
 interface Props {
   children?: any
   pages?: Page[]
@@ -16,9 +15,6 @@ const MenuSidebarView: FC<Props> = ({ pages }) => {
   const { sitePages, legalPages } = usePages(pages)
   const { closeSidebar } = useUI()
   const handleClose = () => closeSidebar()
-  const error = null
-  const success = null
-
   return (
     <div className={s.root}>
       <header className="px-4 pt-6 pb-4 sm:px-6">
@@ -37,62 +33,53 @@ const MenuSidebarView: FC<Props> = ({ pages }) => {
           </div>
         </div>
       </header>
-
-      <div className="px-4 pt-12 pb-4 sm:px-6 space-y-16">
+      <div className="px-4 pt-4 pb-4 sm:px-6 space-y-8">
         <div className="flex">
           <div className="flex-1 space-y-1">
-            <div className="font-semibold text-lg mb-2">Language</div>
-            <div className="cursor-pointer hover:text-primary text-lg text-primary">
+            <div className="font-semibold  mb-2">Language</div>
+            <div className="cursor-pointer hover:text-primary  text-primary">
               English
             </div>
-            <div className="cursor-pointer hover:text-primary text-lg">
-              French
-            </div>
-            <div className="cursor-pointer hover:text-primary text-lg">
-              Arabric
-            </div>
+            <div className="cursor-pointer hover:text-primary ">French</div>
+            <div className="cursor-pointer hover:text-primary ">Arabric</div>
           </div>
           <div className="w-3" />
           <div className="flex-1 space-y-1">
-            <div className="font-semibold text-lg mb-2">Currencies</div>
-            <div className="cursor-pointer hover:text-primary text-lg text-primary">
+            <div className="font-semibold  mb-2">Currencies</div>
+            <div className="cursor-pointer hover:text-primary  text-primary">
               USD - US Dollar
             </div>
-            <div className="cursor-pointer hover:text-primary text-lg">
-              Euro
-            </div>
-            <div className="cursor-pointer hover:text-primary text-lg">
-              Pround
-            </div>
+            <div className="cursor-pointer hover:text-primary ">Euro</div>
+            <div className="cursor-pointer hover:text-primary ">Pround</div>
           </div>
         </div>
-        <div className="col-span-1 lg:col-span-2">
-          <ul className="flex flex-initial flex-col md:flex-1">
-            <li className="py-3 md:py-0 md:pb-4">
+        <div>
+          <ul className="flex flex-initial flex-col md:flex-1 space-y-2">
+            <li className="">
               <Link href="/">
-                <a className="text-lg font-semibold  hover:text-accents-6 transition ease-in-out duration-150">
+                <a className=" font-semibold  hover:text-accents-6 transition ease-in-out duration-150">
                   Home
                 </a>
               </Link>
             </li>
-            <li className="py-3 md:py-0 md:pb-4">
+            <li className="">
               <Link href="/">
-                <a className="text-lg font-semibold  hover:text-accents-6 transition ease-in-out duration-150">
+                <a className=" font-semibold  hover:text-accents-6 transition ease-in-out duration-150">
                   Careers
                 </a>
               </Link>
             </li>
-            <li className="py-3 md:py-0 md:pb-4">
+            <li className="">
               <Link href="/blog">
-                <a className="text-lg font-semibold  hover:text-accents-6 transition ease-in-out duration-150">
+                <a className=" font-semibold  hover:text-accents-6 transition ease-in-out duration-150">
                   Blog
                 </a>
               </Link>
             </li>
             {sitePages.map((page) => (
-              <li key={page.url} className="py-3 md:py-0 md:pb-4">
+              <li key={page.url} className="">
                 <Link href={page.url!}>
-                  <a className="text-lg font-semibold  hover:text-accents-6 transition ease-in-out duration-150">
+                  <a className=" font-semibold  hover:text-accents-6 transition ease-in-out duration-150">
                     {page.name}
                   </a>
                 </Link>
@@ -100,12 +87,26 @@ const MenuSidebarView: FC<Props> = ({ pages }) => {
             ))}
           </ul>
         </div>
-
-        <div className="space-y-6">
-          <a className="text-lg font-semibold  hover:text-accents-6 transition ease-in-out duration-150">
+        <div>
+          <ul className="flex flex-initial flex-col md:flex-1 space-y-2">
+            {['all', 'clothes', 'accessories', 'shoes'].map((string) => {
+              return (
+                <li key={string} className="">
+                  <Link href={`/${string}`}>
+                    <a className=" font-semibold  hover:text-accents-6 transition ease-in-out duration-150">
+                      {string}
+                    </a>
+                  </Link>
+                </li>
+              )
+            })}
+          </ul>
+        </div>
+        <div className="space-y-3">
+          <a className=" font-semibold  hover:text-accents-6 transition ease-in-out duration-150">
             Contact us
           </a>
-          <p className="text-lg leading-loose text-accents-6">
+          <p className=" leading-loose text-accents-6">
             69 Halsey St, Ny 10002, New York, United States
             <br />
             support.center@unero.co
@@ -113,8 +114,8 @@ const MenuSidebarView: FC<Props> = ({ pages }) => {
             (0091) 8547 632521
           </p>
         </div>
-        <div className="space-y-6">
-          <a className="text-lg font-semibold  hover:text-accents-6 transition ease-in-out duration-150">
+        <div className="space-y-3">
+          <a className=" font-semibold  hover:text-accents-6 transition ease-in-out duration-150">
             Follow US On Socials
           </a>
           <div className="flex space-x-4">

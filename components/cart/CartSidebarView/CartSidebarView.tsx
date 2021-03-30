@@ -1,14 +1,14 @@
-import { FC } from 'react'
-import cn from 'classnames'
-import Link from 'next/link'
-import CartItem from '../CartItem'
-import s from './CartSidebarView.module.css'
-import { Button } from '@components/ui'
 import { UserNav } from '@components/common'
+import { Bag, Check, Cross } from '@components/icons'
+import { Button } from '@components/ui'
 import { useUI } from '@components/ui/context'
-import { Bag, Cross, Check } from '@components/icons'
 import useCart from '@framework/cart/use-cart'
 import usePrice from '@framework/product/use-price'
+import cn from 'classnames'
+import Link from 'next/link'
+import { FC } from 'react'
+import CartItem from '../CartItem'
+import s from './CartSidebarView.module.css'
 
 const CartSidebarView: FC = () => {
   const { closeSidebar } = useUI()
@@ -90,10 +90,15 @@ const CartSidebarView: FC = () => {
           <div className="px-4 sm:px-6 flex-1">
             <Link href="/cart">
               <h2
-                className="pt-1 pb-4 text-2xl leading-7 font-bold text-base tracking-wide cursor-pointer inline-block"
+                className="flex items-baseline py-4 tracking-wide cursor-pointer"
                 onClick={handleClose}
               >
-                My Cart
+                <div className="flex-1 text-2xl leading-7 font-bold ">
+                  My Cart
+                </div>
+                <div className="ml-3 text-primary cursor-pointer">
+                  More detail
+                </div>
               </h2>
             </Link>
             <ul className="py-6 space-y-6 sm:py-0 sm:space-y-0 sm:divide-y sm:divide-accents-3 border-t border-accents-3">
@@ -127,6 +132,9 @@ const CartSidebarView: FC = () => {
                 <span>Total</span>
                 <span>{total}</span>
               </div>
+            </div>
+            <div className="flex justify-end pb-2 font-semibold text-primary">
+              <Link href="/cart">View Cart</Link>
             </div>
             <Button href="/checkout" Component="a" width="100%">
               Proceed to Checkout

@@ -5,7 +5,7 @@
   @apply bg-transparent text-primary border-primary-2;
 }
 .root:hover {
-  @apply bg-accents-0 bg-primary text-accents-0 border border-primary-2;
+  @apply bg-primary text-accents-0 border border-primary-2;
 }
 
 .root:focus {

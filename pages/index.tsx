@@ -5,7 +5,8 @@ import Title from '@components/home/Title'
 import { ProductCard } from '@components/product'
 import Article from '@components/sections/home/Article'
 import Countdown from '@components/sections/home/Countdown'
-import { Button, Container, Input } from '@components/ui'
+import Subscribe from '@components/subscribe/Subscribe'
+import { Button, Container } from '@components/ui'
 import Link from '@components/ui/Link'
 import { getConfig } from '@framework/api'
 import getAllPages from '@framework/common/get-all-pages'
@@ -399,18 +400,8 @@ export default function Home({
           })}
         </div>
       </Container>
-      <Container className="py-6 lg:py-12 flex flex-col md:flex-row">
-        <div>
-          <Title small>Our Newsletter</Title>
-        </div>
-        <div className="w-0 md:w-10"></div>
-        <div className="flex-1 flex justify-end pb-3">
-          <Input
-            placeholder="Your email address"
-            className="h-full w-full max-w-md"
-          ></Input>
-          <Button variant="slim">Subscribe</Button>
-        </div>
+      <Container>
+        <Subscribe />
       </Container>
     </>
   )
