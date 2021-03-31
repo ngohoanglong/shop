@@ -1,4 +1,4 @@
-import Title from '@components/home/Title'
+import { Title } from '@components/common'
 import { Button, Input } from '@components/ui'
 import React from 'react'
 const Subscribe: React.FC = () => (

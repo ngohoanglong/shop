@@ -1,119 +1,105 @@
-import { useKeenSlider } from 'keen-slider/react'
 import React, {
   Children,
   FC,
+  forwardRef,
   isValidElement,
-  useState,
-  useRef,
-  useEffect,
+  Ref,
+  RefObject,
 } from 'react'
+import s from './ProductSlider.module.css'
 import cn from 'classnames'
 
-import s from './ProductSlider.module.css'
-
-const ProductSlider: FC = ({ children }) => {
-  const [currentSlide, setCurrentSlide] = useState(0)
-  const [isMounted, setIsMounted] = useState(false)
-  const sliderContainerRef = useRef<HTMLDivElement>(null)
-
-  const [ref, slider] = useKeenSlider<HTMLDivElement>({
-    loop: true,
+import { useKeenSlider } from 'keen-slider/react'
+interface Props {
+  children?: Element[]
+}
+const Slider = forwardRef<HTMLDivElement, Props>(({ children }, ref) => {
+  return (
+    <div ref={ref} className="keen-slider">
+      {Children.map(children, (child) => {
+        // Add the keen-slider__slide className to children
+        return <div className={cn('keen-slider__slide')}>{child}</div>
+      })}
+    </div>
+  )
+})
+const ProductSlider: React.FC = ({ children }) => {
+  const [sliderRef, slider] = useKeenSlider<HTMLDivElement>({
+    spacing: 10,
     slidesPerView: 1,
-    mounted: () => setIsMounted(true),
-    slideChanged(s) {
-      setCurrentSlide(s.details().relativeSlide)
+    centered: false,
+    loop: false,
+    breakpoints: {
+      '(min-width: 600px)': {
+        slidesPerView: 2,
+        mode: 'free-snap',
+      },
+      '(min-width: 800px)': {
+        slidesPerView: 3,
+        mode: 'free-snap',
+      },
+      '(min-width: 1024px)': {
+        slidesPerView: 4,
+        mode: 'free-snap',
+      },
     },
   })
-
-  // Stop the history navigation gesture on touch devices
-  useEffect(() => {
-    const preventNavigation = (event: TouchEvent) => {
-      // Center point of the touch area
-      const touchXPosition = event.touches[0].pageX
-      // Size of the touch area
-      const touchXRadius = event.touches[0].radiusX || 0
-
-      // We set a threshold (10px) on both sizes of the screen,
-      // if the touch area overlaps with the screen edges
-      // it's likely to trigger the navigation. We prevent the
-      // touchstart event in that case.
-      if (
-        touchXPosition - touchXRadius < 10 ||
-        touchXPosition + touchXRadius > window.innerWidth - 10
-      )
-        event.preventDefault()
-    }
-
-    sliderContainerRef.current!.addEventListener(
-      'touchstart',
-      preventNavigation
-    )
-
-    return () => {
-      if (sliderContainerRef.current) {
-        sliderContainerRef.current!.removeEventListener(
-          'touchstart',
-          preventNavigation
-        )
-      }
-    }
-  }, [])
-
   return (
-    <div className={s.root} ref={sliderContainerRef}>
+    <div className={s.root} data-testid="ProductSlider">
       <button
         className={cn(s.leftControl, s.control)}
         onClick={slider?.prev}
         aria-label="Previous Product Image"
-      />
+      >
+        <svg
+          stroke="currentColor"
+          fill="currentColor"
+          strokeWidth="0"
+          viewBox="0 0 16 16"
+          height="1em"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fillRule="evenodd"
+            d="M5.854 4.646a.5.5 0 010 .708L3.207 8l2.647 2.646a.5.5 0 01-.708.708l-3-3a.5.5 0 010-.708l3-3a.5.5 0 01.708 0z"
+            clipRule="evenodd"
+          ></path>
+          <path
+            fillRule="evenodd"
+            d="M2.5 8a.5.5 0 01.5-.5h10.5a.5.5 0 010 1H3a.5.5 0 01-.5-.5z"
+            clipRule="evenodd"
+          ></path>
+        </svg>
+      </button>
       <button
         className={cn(s.rightControl, s.control)}
         onClick={slider?.next}
         aria-label="Next Product Image"
-      />
-      <div
-        ref={ref}
-        className="keen-slider h-full transition-opacity duration-150"
-        style={{ opacity: isMounted ? 1 : 0 }}
       >
-        {Children.map(children, (child) => {
-          // Add the keen-slider__slide className to children
-          if (isValidElement(child)) {
-            return {
-              ...child,
-              props: {
-                ...child.props,
-                className: `${
-                  child.props.className ? `${child.props.className} ` : ''
-                }keen-slider__slide`,
-              },
-            }
-          }
-          return child
-        })}
-      </div>
-      {slider && (
-        <div className={cn(s.positionIndicatorsContainer)}>
-          {[...Array(slider.details().size).keys()].map((idx) => {
-            return (
-              <button
-                aria-label="Position indicator"
-                key={idx}
-                className={cn(s.positionIndicator, {
-                  [s.positionIndicatorActive]: currentSlide === idx,
-                })}
-                onClick={() => {
-                  slider.moveToSlideRelative(idx)
-                }}
-              >
-                <div className={s.dot} />
-              </button>
-            )
-          })}
-        </div>
-      )}
+        <svg
+          stroke="currentColor"
+          fill="currentColor"
+          strokeWidth="0"
+          viewBox="0 0 16 16"
+          height="1em"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fillRule="evenodd"
+            d="M10.146 4.646a.5.5 0 01.708 0l3 3a.5.5 0 010 .708l-3 3a.5.5 0 01-.708-.708L12.793 8l-2.647-2.646a.5.5 0 010-.708z"
+            clipRule="evenodd"
+          ></path>
+          <path
+            fillRule="evenodd"
+            d="M2 8a.5.5 0 01.5-.5H13a.5.5 0 010 1H2.5A.5.5 0 012 8z"
+            clipRule="evenodd"
+          ></path>
+        </svg>
+      </button>
+      <Slider ref={sliderRef}>{children as any}</Slider>
     </div>
   )
 }
-
 export default ProductSlider
