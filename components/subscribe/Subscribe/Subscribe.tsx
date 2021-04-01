@@ -12,6 +12,7 @@ const Subscribe: React.FC = () => (
     <div className="w-0 h-6 md:w-10"></div>
     <div className="flex-1 flex justify-end pb-3">
       <Input
+        type="email"
         placeholder="Your email address"
         className="w-full max-w-md"
       ></Input>
