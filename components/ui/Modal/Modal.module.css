@@ -1,6 +1,11 @@
 .root {
   @apply fixed bg-accents-0 text-primary flex items-center inset-0 z-50 justify-center;
-  background-color: rgba(0, 0, 0, 0.35);
+  &.noBackgroud {
+    @apply bg-transparent;
+    & .modal {
+      @apply bg-transparent;
+    }
+  }
 }
 
 .modal {

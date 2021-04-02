@@ -1,12 +1,11 @@
 import type { Product } from '@commerce/types'
-import { ActionButton, Title } from '@components/common'
+import { ActionButton, Gallery, Title } from '@components/common'
 import { Facebook, GGPlus, Heart, Twitter } from '@components/icons'
 import { ProductCard, Swatch } from '@components/product'
-import { Button, Container, Text, useUI } from '@components/ui'
+import { Button, Container, Modal, Text, useUI } from '@components/ui'
 import Link from '@components/ui/Link'
 import WishlistButton from '@components/wishlist/WishlistButton'
 import { useAddItem } from '@framework/cart'
-import usePrice from '@framework/product/use-price'
 import { NextSeo } from 'next-seo'
 import Image from 'next/image'
 import { FC, useState } from 'react'
@@ -23,11 +22,6 @@ interface Props {
 
 const ProductView: FC<Props> = ({ product, relatedProducts }) => {
   const addItem = useAddItem()
-  const { price } = usePrice({
-    amount: product.price.value,
-    baseAmount: product.price.retailPrice,
-    currencyCode: product.price.currencyCode!,
-  })
   const { openSidebar, setModalView } = useUI()
   const [loading, setLoading] = useState(false)
   const [choices, setChoices] = useState<SelectedOptions>({
@@ -51,7 +45,12 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
       setLoading(false)
     }
   }
-
+  const [open, setOpen] = useState<boolean>()
+  const [index, setIndex] = useState<number>(0)
+  const handleOpenGallery = (index: number) => {
+    setOpen(true)
+    setIndex(index)
+  }
   return (
     <div className="fit space-y-2xl">
       <NextSeo
@@ -110,7 +109,12 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
                             />
                           </div>
                         </div>
-                        <div className="group-hover:opacity-100 hidden group-hover:block group-focus:opacity-100 opacity-0 right-0 top-0 absolute w-5/6">
+                        <div
+                          onClick={() => {
+                            handleOpenGallery(i)
+                          }}
+                          className="hidden group-hover:block  right-0 top-0 absolute w-5/6"
+                        >
                           <div
                             className="w-full bg-gray-200"
                             style={{ paddingTop: '100%' }}
@@ -137,6 +141,9 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
               </div>
               <div className="w-5/6 bg-gray-200">
                 <div
+                  onClick={() => {
+                    handleOpenGallery(0)
+                  }}
                   className="w-full flex-1 relative"
                   style={{ paddingTop: '100%' }}
                 >
@@ -473,6 +480,18 @@ const ProductView: FC<Props> = ({ product, relatedProducts }) => {
           })}
         </ProductSlider>
       </Container>
+      <Modal
+        closable={false}
+        noBackgroud
+        open={open}
+        onClose={() => setOpen(false)}
+      >
+        <Gallery
+          images={product.images}
+          onClose={() => setOpen(false)}
+          index={index}
+        />
+      </Modal>
     </div>
   )
 }
