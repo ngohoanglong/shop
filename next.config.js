@@ -14,7 +14,7 @@ module.exports = withCommerceConfig({
     locales: ['en-US', 'es'],
     defaultLocale: 'en-US',
   },
-  target: 'serverless'
+  target: 'serverless',
   rewrites() {
     return [
       (isBC || isShopify) && {
