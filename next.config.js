@@ -14,6 +14,9 @@ module.exports = withCommerceConfig({
     locales: ['en-US', 'es'],
     defaultLocale: 'en-US',
   },
+  images: {
+    domains: ['example.com'],
+  },
   target: 'serverless',
   rewrites() {
     return [
