@@ -1,8 +1,12 @@
 const commerce = require('./commerce.config.json')
-const withCommerceConfig = require('./framework/commerce/with-config')
+const {
+  withCommerceConfig,
+  getProviderName,
+} = require('./framework/commerce/config')
 
-const isBC = commerce.provider === 'bigcommerce'
-const isShopify = commerce.provider === 'shopify'
+const provider = commerce.provider || getProviderName()
+const isBC = provider === 'bigcommerce'
+const isShopify = provider === 'shopify'
 
 module.exports = withCommerceConfig({
   commerce,
@@ -10,6 +14,10 @@ module.exports = withCommerceConfig({
     locales: ['en-US', 'es'],
     defaultLocale: 'en-US',
   },
+  images: {
+    domains: ['example.com'],
+  },
+  target: 'serverless',
   rewrites() {
     return [
       (isBC || isShopify) && {
@@ -39,3 +47,6 @@ module.exports = withCommerceConfig({
     ].filter((x) => x)
   },
 })
+
+// Don't delete this console log, useful to see the commerce config in Vercel deployments
+console.log('next.config.js', JSON.stringify(module.exports, null, 2))
