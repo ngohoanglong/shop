@@ -40,19 +40,14 @@ const Sidebar: FC<Props> = ({ children, open = false, onClose }) => {
   return (
     <Portal>
       {open ? (
-        <div className={s.root} ref={ref}>
+        <div className={cn(s.root, s.open)} ref={ref}>
           <div className={'absolute inset-0 overflow-hidden'}>
             <div
               className="absolute inset-0 bg-accents-9 opacity-50 transition-opacity"
               onClick={onClose}
             />
-            <section
-              className={cn(
-                s.sidebar,
-                'absolute inset-y-0 right-0 pl-10 max-w-full flex sm:pl-16 outline-none'
-              )}
-            >
-              <div className="h-full md:w-screen md:max-w-md">
+            <section className={s.sidebar}>
+              <div className="h-full w-screen md:max-w-md">
                 <div className="h-full flex flex-col text-base bg-accents-1 shadow-xl overflow-y-auto">
                   {children}
                 </div>
@@ -61,18 +56,13 @@ const Sidebar: FC<Props> = ({ children, open = false, onClose }) => {
           </div>
         </div>
       ) : (
-        <div className={cn(s.root, 'pointer-events-none')} ref={ref}>
+        <div className={cn(s.root)} ref={ref}>
           <div
             className={'absolute inset-0 overflow-hidden pointer-events-none'}
           >
             <div className="absolute inset-0 bg-accents-9 opacity-0 transition-opacity"></div>
-            <section
-              className={cn(
-                s.sidebarClose,
-                'absolute inset-y-0 right-0 pl-10 opacity-0 max-w-full flex sm:pl-16 outline-none'
-              )}
-            >
-              <div className="h-full md:w-screen md:max-w-md">
+            <section className={cn(s.sidebar)}>
+              <div className="h-full w-screen md:max-w-md">
                 <div className="h-full flex flex-col text-base bg-accents-1 shadow-xl overflow-y-auto">
                   {children}
                 </div>

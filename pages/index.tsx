@@ -39,40 +39,29 @@ export async function getStaticProps({
       products,
       hero: [
         {
-          title: 'Welcome To Helendo Store',
-          subTitle: renderToString(
-            <>
-              CHAIR
-              <br />
-              COLLECTION
-              <br />
-              2020
-            </>
-          ),
-          description: renderToString(
-            <>
-              Many desktop publishing packages and web page editors now use{' '}
-              <br />
-              Lorem Ipsum as their default model text
-            </>
-          ),
+          title: 'Create Your Own',
+          subTitle: 'New Arrivals',
+          description: null,
+          buttonText: 'See Our News',
           path: '#',
           imageUrl: '/home-default-1.jpg',
         },
-        ...[products[0], products[1], products[2]].map((p) => ({
-          title: p.name,
-          subTitle: renderToString(
-            <>
-              CHAIR
-              <br />
-              COLLECTION
-              <br />
-              2020
-            </>
-          ),
-          description: p.description,
-          imageUrl: p.images[0].url,
-        })),
+        {
+          title: 'Stools with Style',
+          subTitle: 'Kitchen',
+          description: null,
+          buttonText: 'Explore Now',
+          path: '#',
+          imageUrl: '/home-default-2.jpg',
+        },
+        {
+          title: 'New Arrivals',
+          subTitle: 'Living room',
+          description: null,
+          buttonText: 'Explore Now',
+          path: '#',
+          imageUrl: '/home-default-3.jpg',
+        },
       ],
       categories,
       featured: [products[0], products[1], products[2]],
@@ -134,79 +123,8 @@ export default function Home({
   blogs,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
-    <>
-      <HeroSlider>
-        {hero.map((item, i) => {
-          return (
-            <div key={i + 1}>
-              <div className="flex items-center justify-center w-screen lg:h-screen lg:py-32 flex-shrink-0 flex-col py-20 bg-accents-0 relative">
-                {i === 0 ? (
-                  <Image
-                    quality="100"
-                    layout="fill"
-                    className="absolute object-cover right-0 top-0 flex bg-accents-0 items-center w-screen h-full"
-                    src={item.imageUrl || placeholderImg}
-                    alt={'Product Image'}
-                  />
-                ) : (
-                  <div className="absolute right-0 top-0 flex bg-accents-0 items-center w-1/2 h-full object-cover">
-                    <Image
-                      layout="fill"
-                      objectFit="contain"
-                      quality="85"
-                      src={item.imageUrl || placeholderImg}
-                      alt={item.title || 'Product Image'}
-                    />
-                  </div>
-                )}
-                <Container className="w-full relative h-96 px-6 flex flex-col justify-center">
-                  <Title
-                    subTitle={
-                      <span
-                        dangerouslySetInnerHTML={{
-                          __html: item.subTitle as string,
-                        }}
-                      ></span>
-                    }
-                  >
-                    {item.title}
-                  </Title>
-                  <div className="w-full">
-                    <p
-                      className="mt-6 max-w-sm lg:max-w-lg xl:max-w-xl lg:text-lg xl:text-xl"
-                      dangerouslySetInnerHTML={{ __html: item.description }}
-                    ></p>
-                  </div>
-                  <div className="mt-6">
-                    <Link href={'#'}>
-                      <Button>
-                        Shop now{' '}
-                        <svg
-                          className="inline-block ml-2 text-xl"
-                          stroke="currentColor"
-                          fill="none"
-                          strokeWidth={0}
-                          viewBox="0 0 24 24"
-                          height="1em"
-                          width="1em"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M17 8l4 4m0 0l-4 4m4-4H3"
-                          />
-                        </svg>
-                      </Button>
-                    </Link>
-                  </div>
-                </Container>
-              </div>
-            </div>
-          )
-        })}
-      </HeroSlider>
+    <div className="w-full space-y-12">
+      <HeroSlider list={hero}></HeroSlider>
       {featured &&
         featured.map((product, i) => {
           const left = i % 2 === 0
@@ -238,7 +156,7 @@ export default function Home({
                     </div>
                     <div className="mt-6">
                       <Link href={product.path || '#'}>
-                        <Button secondary variant="slim">
+                        <Button secondary>
                           Only
                           <span>
                             {' '}
@@ -295,7 +213,7 @@ export default function Home({
                     </p>
                   </div>
                   <div className="mt-6">
-                    <Button secondary variant="slim">
+                    <Button secondary>
                       Only
                       <span>
                         {' '}
@@ -402,7 +320,7 @@ export default function Home({
       <Container>
         <Subscribe />
       </Container>
-    </>
+    </div>
   )
 }
 

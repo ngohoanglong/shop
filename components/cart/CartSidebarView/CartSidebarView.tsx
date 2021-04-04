@@ -1,4 +1,4 @@
-import { UserNav } from '@components/common'
+import { SidebarLayout } from '@components/common'
 import { Bag, Check, Cross } from '@components/icons'
 import { Button } from '@components/ui'
 import { useUI } from '@components/ui/context'
@@ -32,28 +32,11 @@ const CartSidebarView: FC = () => {
   const success = null
 
   return (
-    <div
+    <SidebarLayout
       className={cn(s.root, {
         [s.empty]: error || success || isLoading || isEmpty,
       })}
     >
-      <header className="px-4 pt-6 pb-4 sm:px-6">
-        <div className="flex justify-between space-x-3 items-center">
-          <div className="h-7 flex items-center">
-            <button
-              onClick={handleClose}
-              aria-label="Close panel"
-              className="hover:text-gray-500 transition ease-in-out duration-150"
-            >
-              <Cross className="h-6 w-6" />
-            </button>
-          </div>
-          <div className="space-y-1">
-            <UserNav />
-          </div>
-        </div>
-      </header>
-
       {isLoading || isEmpty ? (
         <div className="flex-1 px-4 flex flex-col justify-center items-center">
           <span className="border border-dashed border-primary rounded-full flex items-center justify-center w-16 h-16 p-12 bg-secondary text-secondary">
@@ -111,7 +94,6 @@ const CartSidebarView: FC = () => {
               ))}
             </ul>
           </div>
-
           <div className="flex-shrink-0 px-4  py-5 sm:px-6">
             <div className="border-t border-accents-3">
               <ul className="py-3">
@@ -142,7 +124,7 @@ const CartSidebarView: FC = () => {
           </div>
         </>
       )}
-    </div>
+    </SidebarLayout>
   )
 }
 

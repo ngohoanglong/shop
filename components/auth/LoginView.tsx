@@ -1,8 +1,8 @@
-import { FC, useEffect, useState, useCallback } from 'react'
-import { Logo, Button, Input } from '@components/ui'
-import useLogin from '@framework/auth/use-login'
+import { Button, Input, Logo } from '@components/ui'
 import { useUI } from '@components/ui/context'
+import useLogin from '@framework/auth/use-login'
 import { validate } from 'email-validator'
+import { FC, useCallback, useEffect, useState } from 'react'
 
 interface Props {}
 
@@ -58,7 +58,7 @@ const LoginView: FC<Props> = () => {
   return (
     <form
       onSubmit={handleLogin}
-      className="w-80 flex flex-col justify-between p-3"
+      className="w-full max-w-md flex flex-col justify-between p-3"
     >
       <div className="flex justify-center pb-12 ">
         <Logo width="64px" height="64px" />

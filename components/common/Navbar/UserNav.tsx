@@ -1,12 +1,11 @@
-import { FC } from 'react'
-import Link from 'next/link'
-import cn from 'classnames'
-import type { LineItem } from '@framework/types'
+import { Bag, Heart, Search } from '@components/icons'
+import { useUI } from '@components/ui/context'
 import useCart from '@framework/cart/use-cart'
 import useCustomer from '@framework/customer/use-customer'
-import { Avatar } from '@components/common'
-import { Heart, Bag, User, Menu, Search } from '@components/icons'
-import { useUI } from '@components/ui/context'
+import type { LineItem } from '@framework/types'
+import cn from 'classnames'
+import Link from 'next/link'
+import { FC } from 'react'
 import DropdownMenu from './DropdownMenu'
 import s from './UserNav.module.css'
 
@@ -32,7 +31,7 @@ const UserNav: FC<Props> = ({ className }) => {
     <nav className={cn(s.root, className)}>
       <div className={s.mainContainer}>
         <ul className={s.list}>
-          <li className={s.item}>
+          <li className={cn(s.item, s.visibleOnLg)}>
             {customer ? (
               <DropdownMenu />
             ) : (
@@ -41,12 +40,25 @@ const UserNav: FC<Props> = ({ className }) => {
                   setModalView('LOGIN_VIEW')
                   openModal()
                 }}
+                className="text-sm"
                 aria-label="Wishlist"
               >
-                <User />
+                Sign in
               </a>
             )}
           </li>
+          <li className={cn(s.item, s.visibleOnLg)} onClick={toggleSidebar}>
+            <Search />
+          </li>
+          {process.env.COMMERCE_WISHLIST_ENABLED && (
+            <li className={cn(s.item, s.visibleOnLg, 'hidden lg:block')}>
+              <Link href="/wishlist">
+                <a onClick={closeSidebarIfPresent} aria-label="Wishlist">
+                  <Heart />
+                </a>
+              </Link>
+            </li>
+          )}
           <li
             className={s.item}
             onClick={() => {
@@ -56,27 +68,6 @@ const UserNav: FC<Props> = ({ className }) => {
           >
             <Bag />
             {itemsCount > 0 && <span className={s.bagCount}>{itemsCount}</span>}
-          </li>
-          <li className={cn(s.item, s.itemhidden)} onClick={toggleSidebar}>
-            <Search />
-          </li>
-          {process.env.COMMERCE_WISHLIST_ENABLED && (
-            <li className={cn(s.item, 'hidden lg:block')}>
-              <Link href="/wishlist">
-                <a onClick={closeSidebarIfPresent} aria-label="Wishlist">
-                  <Heart />
-                </a>
-              </Link>
-            </li>
-          )}
-          <li
-            onClick={() => {
-              setModalView('MENU')
-              openSidebar()
-            }}
-            className={s.item}
-          >
-            <Menu />
           </li>
         </ul>
       </div>

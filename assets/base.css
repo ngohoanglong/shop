@@ -1,12 +1,12 @@
 :root {
-  --primary: rgba(220, 177, 74, 1);
-  --primary-2: rgba(185, 148, 62, 1);
+  --primary: rgba(0, 0, 0, 1);
+  --secondary-2: rgba(17, 17, 17, 1);
   --secondary: rgba(0, 0, 0, 1);
   --secondary-2: rgba(17, 17, 17, 1);
   --selection: var(--cyan);
 
   --text-base: rgba(0, 0, 0, 1);
-  --text-primary: rgba(220, 177, 74, 1);
+  --text-primary: rgba(0, 0, 0, 1);
   --text-secondary: rgba(255, 255, 255, 1);
 
   --hover: rgba(220, 177, 74, 1);
@@ -78,7 +78,6 @@ html {
 
 html,
 body {
-  font-family: var(--font-sans);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

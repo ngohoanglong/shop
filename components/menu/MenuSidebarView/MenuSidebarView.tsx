@@ -1,6 +1,4 @@
-import { UserNav } from '@components/common'
-import { Cross } from '@components/icons'
-import { useUI } from '@components/ui/context'
+import { SidebarLayout } from '@components/common'
 import type { Page } from '@framework/common/get-all-pages'
 import getSlug from '@lib/get-slug'
 import Link from 'next/link'
@@ -13,26 +11,9 @@ interface Props {
 }
 const MenuSidebarView: FC<Props> = ({ pages }) => {
   const { sitePages, legalPages } = usePages(pages)
-  const { closeSidebar } = useUI()
-  const handleClose = () => closeSidebar()
+
   return (
-    <div className={s.root}>
-      <header className="px-4 pt-6 pb-4 sm:px-6">
-        <div className="flex justify-between space-x-3 items-center">
-          <div className="h-7 flex items-center">
-            <button
-              onClick={handleClose}
-              aria-label="Close panel"
-              className="hover:text-gray-500 transition ease-in-out duration-150"
-            >
-              <Cross className="h-6 w-6" />
-            </button>
-          </div>
-          <div className="space-y-1">
-            <UserNav />
-          </div>
-        </div>
-      </header>
+    <SidebarLayout className={s.root}>
       <div className="px-4 pt-4 pb-4 sm:px-6 space-y-8">
         <div className="flex">
           <div className="flex-1 space-y-1">
@@ -162,7 +143,7 @@ const MenuSidebarView: FC<Props> = ({ pages }) => {
           </div>
         </div>
       </div>
-    </div>
+    </SidebarLayout>
   )
 }
 

@@ -16,7 +16,9 @@
   &.itemhidden {
     @apply lg:hidden;
   }
-
+  &.visibleOnLg {
+    @apply hidden lg:block;
+  }
   &:hover {
     @apply text-primary transition scale-110 duration-100;
   }

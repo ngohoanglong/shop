@@ -1,6 +1,6 @@
+import cn from 'classnames'
 import React from 'react'
 import s from './Title.module.css'
-import cn from 'classnames'
 
 export interface Props {
   small?: boolean
@@ -18,9 +18,6 @@ const Title: React.FC<Props> = ({ small, subTitle, center, children }) => (
   >
     {subTitle && <h4 className={s.subTitle}>{subTitle}</h4>}
     <h2 className={s.title}>{children}</h2>
-    <div>
-      <div className={s.divide} />
-    </div>
   </div>
 )
 export default Title

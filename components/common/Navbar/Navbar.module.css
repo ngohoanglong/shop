@@ -1,7 +1,7 @@
 .root {
-  @apply sticky w-full top-0 bg-accents-0 z-40;
+  @apply sticky w-full top-0 bg-accents-0 z-40 transition-colors duration-700;
   &.transparent {
-    @apply bg-transparent fixed;
+    @apply bg-transparent fixed  hover:bg-accents-0;
   }
   &.hasScrolled {
     @apply shadow-magical bg-accents-0;
@@ -9,13 +9,25 @@
 }
 
 .link {
-  @apply inline-flex items-center leading-6 font-medium transition ease-in-out duration-75 cursor-pointer text-accents-6;
+  @apply inline-flex items-center text-sm transition ease-in-out duration-75 cursor-pointer text-accents-6 relative overflow-hidden  leading-extra-loose;
 }
-
+.link:after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 0;
+  border-bottom: 1px solid;
+  transition: width 0.3s;
+}
 .link:hover {
   @apply text-primary;
 }
-
+.link:hover:after {
+  @apply text-primary;
+  width: 100%;
+  left: 0;
+}
 .link:focus {
   @apply outline-none text-primary;
 }
@@ -26,5 +38,44 @@
   &:hover {
     @apply shadow-md;
     transform: scale(1.05);
+  }
+}
+.item {
+  & svg {
+    font-size: 1.6rem;
+    stroke-width: 1.2;
+  }
+  @apply mr-6 cursor-pointer relative transition ease-in-out duration-100 outline-none;
+  &.itemhidden {
+    @apply lg:hidden;
+  }
+
+  &:hover {
+    @apply text-primary transition scale-110 duration-100;
+  }
+
+  &:last-child {
+    @apply mr-0;
+  }
+
+  &:focus,
+  &:active {
+    @apply outline-none;
+  }
+}
+@keyframes sidebaranimationOpen {
+  0% {
+    transform: translateX(-110%);
+  }
+  110% {
+    transform: translateX(0);
+  }
+}
+@keyframes sidebaranimationClose {
+  0% {
+    transform: translateX(0);
+  }
+  110% {
+    transform: translateX(110%);
   }
 }

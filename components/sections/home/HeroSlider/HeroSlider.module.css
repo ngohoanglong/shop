@@ -1,6 +1,6 @@
 .root {
-  @apply relative w-full h-full;
-  overflow-y: hidden;
+  @apply relative w-full h-screen;
+  overflow: hidden;
 }
 
 .control {
@@ -12,16 +12,15 @@
 }
 
 .positionIndicatorsContainer {
-  @apply block absolute bottom-6 left-1/2;
-  transform: translateX(-50%);
+  @apply block absolute bottom-6 left-0 w-full z-10;
 }
 
 .positionIndicator {
-  @apply rounded-full p-2;
+  @apply rounded-full mr-8;
 }
 
 .dot {
-  @apply bg-accents-3 transition w-3 h-3 rounded-full;
+  @apply bg-accents-5 transition w-2 h-2 rounded-full;
 }
 
 .positionIndicator:hover .dot {
@@ -42,4 +41,41 @@
 
 .positionIndicatorActive:hover .dot {
   @apply bg-primary-2;
+}
+.faderSlide {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  @apply pointer-events-none opacity-0 transition-all delay-300 duration-700 ease-in-out lg:text-lg;
+  & .subTitle {
+    @apply font-semibold mb-lg max-w-xs transition-all duration-300 ease-in-out;
+    line-height: 1.41;
+    transform: translateX(5rem);
+    transition: all 0.3s linear 0.3s;
+    font-size: 0.8em;
+  }
+  & .title {
+    @apply max-w-sm lg:max-w-xl xl:max-w-2xl transition-all duration-700 ease-in-out;
+    line-height: 1.1;
+    transform: translateX(5rem);
+    font-size: 5em;
+  }
+  & .buttonText {
+    @apply transition-all duration-1000 ease-in-out;
+    font-size: 0.8em;
+    transform: translateX(5rem);
+  }
+}
+.faderSlide.current {
+  @apply pointer-events-auto opacity-100;
+  & .subTitle {
+    transform: translateX(0);
+  }
+  & .title {
+    transform: translateX(0);
+  }
+  & .buttonText {
+    transform: translateX(0);
+  }
 }
