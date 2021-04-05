@@ -123,7 +123,23 @@ export default function Home({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <div className="w-full space-y-12">
-      <HeroSlider list={hero}></HeroSlider>
+      <div className="relative w-full overflow-hidden">
+        <HeroSlider list={hero}></HeroSlider>
+        <div className="absolute inset-0">
+          <Container className="pointer-events-none w-full h-full">
+            <div className="w-full h-full relative">
+              <div
+                style={{ width: '100vh', '--tw-translate-x': '22px' } as any}
+                className="pointer-events-auto absolute left-full top-0 flex transform rotate-90 origin-top-left"
+              >
+                <div className="flex-1"></div>
+                <div className="flex-1">socials</div>
+                <div className="flex-1">srolldown</div>
+              </div>
+            </div>
+          </Container>
+        </div>
+      </div>
       {featured &&
         featured.map((product, i) => {
           const left = i % 2 === 0
