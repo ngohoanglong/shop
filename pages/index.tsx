@@ -2,7 +2,6 @@ import { Layout, Navbar, Title } from '@components/common'
 import { ProductCard } from '@components/product'
 import ProductSlider from '@components/product/ProductSlider'
 import Article from '@components/sections/home/Article'
-import Countdown from '@components/sections/home/Countdown'
 import HeroSlider from '@components/sections/home/HeroSlider'
 import Subscribe from '@components/subscribe/Subscribe'
 import { Button, Container } from '@components/ui'
@@ -261,52 +260,6 @@ export default function Home({
           })}
         </ProductSlider>
       </Container>
-      {countdown && (
-        <div className="flex items-center justify-center w-full  lg:py-32 flex-shrink-0 flex-col py-16 bg-accents-2 relative">
-          <div className="absolute right-0 top-0 flex bg-accents-0 items-center w-full h-full">
-            <Image
-              layout="fill"
-              objectFit="cover"
-              className="object-cover h-full"
-              src={'/countdown.jpg'}
-              alt={'Product Image'}
-            />
-          </div>
-          <Container className="w-full relative h-96 px-6 flex flex-col justify-center">
-            <Title small>
-              <span dangerouslySetInnerHTML={{ __html: countdown.title }} />
-            </Title>
-            <p className="mt-6 max-w-sm lg:max-w-md xl:max-w-lg lg:text-md xl:text-lg">
-              {countdown.content}
-            </p>
-            <Countdown date={countdown.date} />
-            <div className="mt-6 xlmt-10">
-              <Link href={countdown.path}>
-                <Button>
-                  Shop now{' '}
-                  <svg
-                    className="inline-block ml-2 text-xl"
-                    stroke="currentColor"
-                    fill="none"
-                    strokeWidth={0}
-                    viewBox="0 0 24 24"
-                    height="1em"
-                    width="1em"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M17 8l4 4m0 0l-4 4m4-4H3"
-                    />
-                  </svg>
-                </Button>
-              </Link>
-            </div>
-          </Container>
-        </div>
-      )}
       <Container className="py-6 lg:py-12 space-y-6 lg:space-y-10">
         <Title small center>
           Our Blog
